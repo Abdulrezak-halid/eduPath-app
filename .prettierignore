@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+packages/*/node_modules/
+
+# Build
+dist/
+build/
+packages/*/dist/
+packages/*/build/
+
+# Misc
+*.lock
+package-lock.json
+.env
+.env.*
+coverage/
