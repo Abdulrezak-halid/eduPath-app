@@ -1,0 +1,18 @@
+{
+  "financialPlanning": {
+    "title": "Finansal Planlama",
+    "subtitle": "Öğrenci Bütçe Yönetimi",
+    "tips": {
+      "title": "Finansal İpuçları",
+      "budgeting": "Bütçe Planlama",
+      "savings": "Tasarruf İpuçları",
+      "expenses": "Gider Takibi"
+    },
+    "planning": {
+      "title": "Finansal Plan",
+      "monthly": "Aylık Plan",
+      "semester": "Dönemlik Plan",
+      "yearly": "Yıllık Plan"
+    }
+  }
+}

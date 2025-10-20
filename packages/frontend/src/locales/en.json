@@ -1,0 +1,18 @@
+{
+  "financialPlanning": {
+    "title": "Financial Planning",
+    "subtitle": "Student Budget Management",
+    "tips": {
+      "title": "Financial Tips",
+      "budgeting": "Budget Planning",
+      "savings": "Saving Tips",
+      "expenses": "Expense Tracking"
+    },
+    "planning": {
+      "title": "Financial Plan",
+      "monthly": "Monthly Plan",
+      "semester": "Semester Plan",
+      "yearly": "Yearly Plan"
+    }
+  }
+}
