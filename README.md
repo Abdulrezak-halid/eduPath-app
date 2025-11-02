@@ -1,93 +1,207 @@
-# eduPath-app
+# 🎓 EduPath
 
+[![TypeScript](https://img.shields.io/badge/TypeScript-4.9.5-blue.svg)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React-18.2.0-blue.svg)](https://reactjs.org/)
+[![Material UI](https://img.shields.io/badge/Material_UI-5.0.0-blue.svg)](https://mui.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+EduPath is a comprehensive educational platform designed to guide students through their academic journey, providing valuable resources, tools, and support for university success.
 
-## Getting started
+## 🌟 Features
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+- **Academic Planning**
+  - Strategic course selection
+  - Study schedule planning
+  - Exam preparation guides
+  - Academic progress tracking
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+- **Career Guidance**
+  - Career path exploration
+  - Interview preparation tips
+  - Resume writing guidance
+  - Professional development resources
 
-## Add your files
+- **University Life**
+  - Campus life guidance
+  - Student organization information
+  - Time management tips
+  - Social integration support
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
+- **Study Skills**
+  - Effective reading strategies
+  - Note-taking methods
+  - Memory enhancement techniques
+  - Exam preparation strategies
+
+- **Personal Development**
+  - Leadership skills development
+  - Communication skills enhancement
+  - Self-improvement resources
+  - Goal setting and tracking
+
+- **Financial Planning**
+  - Student budget management
+  - Savings strategies
+  - Expense tracking tools
+  - Financial literacy resources
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (v18 or higher)
+- npm or yarn
+- Git
+
+### Installation
+
+1. Clone the repository
+```bash
+git clone https://gitlab.com/Abdhalid/edupath-app.git
+cd edupath-app
+```
+
+2. Install dependencies
+```bash
+# Install root dependencies
+npm install
+
+# Install frontend dependencies
+cd packages/frontend
+npm install
+
+# Install backend dependencies
+cd ../backend
+npm install
+```
+
+3. Set up environment variables
+```bash
+# Frontend
+cp packages/frontend/.env.example packages/frontend/.env
+
+# Backend
+cp packages/backend/.env.example packages/backend/.env
+```
+
+4. Start the development servers
+```bash
+# Start both frontend and backend in development mode
+npm run dev
+```
+
+## 🏗️ Project Structure
 
 ```
-cd existing_repo
-git remote add origin https://gitlab.com/Abdhalid/edupath-app.git
-git branch -M main
-git push -uf origin main
+edupath-app/
+├── packages/
+│   ├── frontend/           # React frontend application
+│   │   ├── src/
+│   │   │   ├── modules/    # Feature modules
+│   │   │   ├── shared/     # Shared components and utilities
+│   │   │   └── locales/    # i18n translation files
+│   │   └── public/         # Static assets
+│   │
+│   └── backend/            # Node.js backend application
+│       ├── src/
+│       │   ├── controllers/
+│       │   ├── models/
+│       │   └── services/
+│       └── tests/
+└── docs/                   # Documentation
 ```
 
-## Integrate with your tools
+## 🛠️ Technology Stack
 
-- [ ] [Set up project integrations](https://gitlab.com/Abdhalid/edupath-app/-/settings/integrations)
+### Frontend
+- **React.js** - UI library
+- **TypeScript** - Type safety and better developer experience
+- **Material UI** - Component library and theming
+- **i18next** - Internationalization
+- **Vite** - Build tool and development server
+- **React Router** - Client-side routing
+- **Framer Motion** - Animations
 
-## Collaborate with your team
+### Backend
+- **Node.js** - Runtime environment
+- **TypeScript** - Type safety
+- **Express.js** - Web framework
+- **MongoDB** - Database
+- **Jest** - Testing framework
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
+## 🌐 Internationalization
 
-## Test and Deploy
+EduPath currently supports:
+- English (en)
+- Turkish (tr)
 
-Use the built-in continuous integration in GitLab.
+To add a new language, create a translation file in `packages/frontend/src/locales/`.
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+## 🧪 Testing
 
-***
+```bash
+# Run frontend tests
+cd packages/frontend
+npm test
 
-# Editing this README
+# Run backend tests
+cd packages/backend
+npm test
+```
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+## 📦 Building for Production
 
-## Suggestions for a good README
+```bash
+# Build frontend
+cd packages/frontend
+npm run build
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+# Build backend
+cd packages/backend
+npm run build
+```
 
-## Name
-Choose a self-explaining name for your project.
+## 🤝 Contributing
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+Please make sure to update tests as appropriate and adhere to the existing coding style.
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+## 📝 License
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+## 🙏 Acknowledgments
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+Thanks to all contributors who have helped shape EduPath into what it is today!
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+## 📞 Contact
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+- Email: contact@edupath.com
+- Website: https://edupath.com
+- LinkedIn: [EduPath](https://linkedin.com/company/edupath)
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+## 🚀 Roadmap
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+### Upcoming Features
+- [ ] Interactive quizzes and assessments
+- [ ] Student community forums
+- [ ] Mobile application
+- [ ] AI-powered study recommendations
+- [ ] Virtual study groups
+- [ ] Progress tracking dashboard
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+### Completed
+- [x] Multi-language support
+- [x] Module-based learning paths
+- [x] Responsive design
+- [x] User authentication
+- [x] Basic content management
 
-## License
-For open source projects, say how it is licensed.
+## 🔄 Project Status
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+EduPath is under active development with regular updates and new features being added. We welcome contributions from the community!
