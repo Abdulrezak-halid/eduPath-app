@@ -32,5 +32,6 @@
       "@assets/*": ["src/assets/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "src/shared/types/*.d.ts"],
+  "typeRoots": ["./node_modules/@types", "./src/shared/types"],
 }
