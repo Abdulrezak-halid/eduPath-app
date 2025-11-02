@@ -3,7 +3,6 @@ import {
   Box,
   Container,
   Toolbar,
-  Typography,
   IconButton,
   Menu,
   MenuItem,
@@ -26,13 +25,6 @@ const StyledAppBar = styled(AppBar)(({ theme }) => ({
   background: theme.palette.background.paper,
   boxShadow: 'none',
   borderBottom: `1px solid ${theme.palette.divider}`,
-}));
-
-const StyledFooter = styled(Box)(({ theme }) => ({
-  padding: theme.spacing(6, 0),
-  marginTop: 'auto',
-  backgroundColor: theme.palette.grey[50],
-  borderTop: `1px solid ${theme.palette.divider}`,
 }));
 
 export const CMainLayout = ({ children }: ICMainLayoutProps): JSX.Element => {
@@ -176,11 +168,7 @@ export const CMainLayout = ({ children }: ICMainLayoutProps): JSX.Element => {
           >
             {t('navigationQuestions')}
           </MenuItem>
-          <MenuItem
-            component={RouterLink}
-            to="/about"
-            onClick={handleClose}
-          >
+          <MenuItem component={RouterLink} to="/about" onClick={handleClose}>
             {t('navigationAbout')}
           </MenuItem>
         </Menu>
@@ -205,14 +193,6 @@ export const CMainLayout = ({ children }: ICMainLayoutProps): JSX.Element => {
           {children}
         </motion.div>
       </Box>
-
-      <StyledFooter>
-        <Container maxWidth="lg">
-          <Typography variant="body2" color="text.secondary" align="center">
-            © {new Date().getFullYear()}  {t('EduPath')}. {t('footerRights')}
-          </Typography>
-        </Container>
-      </StyledFooter>
     </Box>
   );
 };

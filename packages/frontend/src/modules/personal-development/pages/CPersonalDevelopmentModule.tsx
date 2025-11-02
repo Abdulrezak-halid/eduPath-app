@@ -13,30 +13,28 @@ export const CPersonalDevelopmentModule = (): JSX.Element => {
   const articles = [
     {
       id: 'self-improvement',
-      title: t('personalDevelopment.articles.selfImprovement.title'),
-      description: t(
-        'personalDevelopment.articles.selfImprovement.description'
-      ),
+      title: t('personalDevelopmentSelfImprovementTitle'),
+      description: t('personalDevelopmentSelfImprovementDescription'),
       icon: <TrendingUpOutlinedIcon sx={{ fontSize: 40 }} />,
     },
     {
       id: 'leadership',
-      title: t('personalDevelopment.articles.leadership.title'),
-      description: t('personalDevelopment.articles.leadership.description'),
+      title: t('personalDevelopmentLeadershipTitle'),
+      description: t('personalDevelopmentLeadershipDescription'),
       icon: <StarOutlineOutlinedIcon sx={{ fontSize: 40 }} />,
     },
     {
       id: 'communication',
-      title: t('personalDevelopment.articles.communication.title'),
-      description: t('personalDevelopment.articles.communication.description'),
+      title: t('personalDevelopmentCommunicationTitle'),
+      description: t('personalDevelopmentCommunicationDescription'),
       icon: <ChatOutlinedIcon sx={{ fontSize: 40 }} />,
     },
   ];
 
   return (
     <CBaseModulePage
-      title={t('modules.personalDevelopment.title')}
-      subtitle={t('modules.personalDevelopment.description')}
+      title={t('personalDevelopmentTitle')}
+      subtitle={t('personalDevelopmentDescription')}
       icon={createElement(TrendingUpOutlinedIcon, { sx: { fontSize: 60 } })}
     >
       <Grid container spacing={3}>

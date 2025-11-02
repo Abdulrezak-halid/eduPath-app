@@ -2,6 +2,7 @@
   "EduPath": "EduPath",
   "startJourney": "Start Your Journey",
   "viewTips": "View Tips",
+  "back": "Back",
   "loading": "Loading...",
   "error": "An error occurred",
   "readMore": "Read More",
@@ -102,5 +103,13 @@
   "aboutMissionTitle": "Our Mission",
   "aboutMissionDescription": "To empower students with the knowledge and tools they need to navigate their academic journey successfully and prepare for their future careers.",
   "aboutVisionTitle": "Our Vision",
-  "aboutVisionDescription": "To become the leading platform for student guidance and academic success, creating a global community of empowered learners."
+  "aboutVisionDescription": "To become the leading platform for student guidance and academic success, creating a global community of empowered learners.",
+
+  "footerAboutTitle": "About EduPath",
+  "footerAboutDescription": "Empowering students to navigate their academic journey and achieve their full potential through comprehensive guidance and support.",
+  "footerQuickLinksTitle": "Quick Links",
+  "footerContactTitle": "Contact Us",
+  "footerContactEmail": "Email: contact@edupath.com",
+  "footerContactPhone": "Phone: +1 (555) 123-4567",
+  "footerRightsReserved": "All rights reserved."
 }

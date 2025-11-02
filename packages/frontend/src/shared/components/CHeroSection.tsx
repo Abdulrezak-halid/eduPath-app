@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
 import styled from '@emotion/styled';
 import { Box, Container, Typography, useTheme } from '@mui/material';
+import { CBackButton } from './CBackButton';
+import { useLocation } from 'react-router-dom';
 
 interface ICHeroSectionProps {
   title: React.ReactNode;
@@ -40,9 +42,12 @@ export const CHeroSection = ({
   children,
 }: ICHeroSectionProps): JSX.Element => {
   const theme = useTheme();
+  const location = useLocation();
+  const showBackButton = location.pathname !== '/';
 
   return (
-    <HeroWrapper>
+    <HeroWrapper sx={{ position: 'relative' }}>
+      {showBackButton && <CBackButton />}
       <ContentWrapper maxWidth="md">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -15,28 +15,28 @@ export const CStudySkillsModule = (): JSX.Element => {
   const articles = [
     {
       id: 'effective-reading',
-      title: t('studySkills.articles.effectiveReading.title'),
-      description: t('studySkills.articles.effectiveReading.description'),
+      title: t('studySkillsEffectiveReadingTitle'),
+      description: t('studySkillsEffectiveReadingDescription'),
       icon: <MenuBookOutlinedIcon sx={{ fontSize: 40 }} />,
     },
     {
       id: 'note-taking',
-      title: t('studySkills.articles.noteTaking.title'),
-      description: t('studySkills.articles.noteTaking.description'),
+      title: t('studySkillsNoteTakingTitle'),
+      description: t('studySkillsNoteTakingDescription'),
       icon: <EditNoteOutlinedIcon sx={{ fontSize: 40 }} />,
     },
     {
       id: 'memory-techniques',
-      title: t('studySkills.articles.memoryTechniques.title'),
-      description: t('studySkills.articles.memoryTechniques.description'),
+      title: t('studySkillsMemoryTechniquesTitle'),
+      description: t('studySkillsMemoryTechniquesDescription'),
       icon: <PsychologyOutlinedIcon sx={{ fontSize: 40 }} />,
     },
   ];
 
   return (
     <CBaseModulePage
-      title={t('modules.studySkills.title')}
-      subtitle={t('modules.studySkills.description')}
+      title={t('studySkillsTitle')}
+      subtitle={t('studySkillsDescription')}
       icon={createElement(LocalLibraryOutlinedIcon, { sx: { fontSize: 60 } })}
     >
       <Grid container spacing={3}>

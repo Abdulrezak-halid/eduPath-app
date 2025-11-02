@@ -2,6 +2,7 @@
   "EduPath": "Eğitim Yolunuz",
   "startJourney": "Yolculuğa Başla",
   "viewTips": "İpuçlarını Görüntüle",
+  "back": "Geri",
   "loading": "Yükleniyor...",
   "error": "Bir hata oluştu",
   "readMore": "Devamını Oku",
@@ -102,5 +103,13 @@
   "aboutMissionTitle": "Misyonumuz",
   "aboutMissionDescription": "Öğrencileri akademik yolculuklarında başarılı olmak ve gelecekteki kariyerlerine hazırlanmak için ihtiyaç duydukları bilgi ve araçlarla güçlendirmek.",
   "aboutVisionTitle": "Vizyonumuz",
-  "aboutVisionDescription": "Öğrenci rehberliği ve akademik başarı konusunda lider platform olmak ve güçlendirilmiş öğrencilerden oluşan küresel bir topluluk oluşturmak."
+  "aboutVisionDescription": "Öğrenci rehberliği ve akademik başarı konusunda lider platform olmak ve güçlendirilmiş öğrencilerden oluşan küresel bir topluluk oluşturmak.",
+
+  "footerAboutTitle": "EduPath Hakkında",
+  "footerAboutDescription": "Kapsamlı rehberlik ve destek yoluyla öğrencilerin akademik yolculuklarını yönlendirmelerine ve tam potansiyellerine ulaşmalarına yardımcı oluyoruz.",
+  "footerQuickLinksTitle": "Hızlı Bağlantılar",
+  "footerContactTitle": "Bize Ulaşın",
+  "footerContactEmail": "E-posta: contact@edupath.com",
+  "footerContactPhone": "Telefon: +1 (555) 123-4567",
+  "footerRightsReserved": "Tüm hakları saklıdır."
 }
