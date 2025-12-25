@@ -1,8 +1,8 @@
 /**
- * Firebase Service Examples
+ * Firebase Service Layer
  * 
- * This file demonstrates how to use Firebase services (auth, db, storage)
- * throughout the application. Use these patterns in your components and hooks.
+ * This file provides service methods for all Firebase operations.
+ * Uses TypeScript models for type safety and validation.
  */
 
 import { auth, db, storage } from '../../firebase';
@@ -11,7 +11,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
-  User,
+  User as FirebaseUser,
 } from 'firebase/auth';
 import {
   collection,
@@ -26,6 +26,9 @@ import {
   orderBy,
   limit,
   Timestamp,
+  increment,
+  setDoc,
+  writeBatch,
 } from 'firebase/firestore';
 import {
   ref,
@@ -33,31 +36,69 @@ import {
   getDownloadURL,
   deleteObject,
 } from 'firebase/storage';
+import type {
+  User,
+  CreateUserInput,
+  UpdateUserInput,
+  Question,
+  CreateQuestionInput,
+  UpdateQuestionInput,
+  Answer,
+  CreateAnswerInput,
+  UpdateAnswerInput,
+  Advice,
+  CreateAdviceInput,
+  UpdateAdviceInput,
+  Notification,
+  CreateNotificationInput,
+  ReputationEvent,
+  CreateReputationEventInput,
+  ReputationAction,
+} from '../models';
+import { REPUTATION_POINTS } from '../models/firestore.models';
 
 // ============================================================================
-// Authentication Service Examples
+// Authentication Service
 // ============================================================================
 
 /**
- * Register a new user
+ * Register a new user with email and password
  */
 export const registerUser = async (
   email: string,
   password: string,
   displayName: string
-): Promise<User> => {
+): Promise<FirebaseUser> => {
   const userCredential = await createUserWithEmailAndPassword(auth, email, password);
   
   // Update profile with display name
   await updateProfile(userCredential.user, { displayName });
   
   // Create user document in Firestore
-  await addDoc(collection(db, 'users'), {
+  const userData: Omit<User, 'id'> = {
     uid: userCredential.user.uid,
-    email: userCredential.user.email,
+    email: userCredential.user.email!,
+    emailVerified: userCredential.user.emailVerified,
     displayName,
+    role: 'student',
+    isActive: true,
+    isBanned: false,
+    reputationScore: 0,
+    badges: [],
+    questionsAsked: 0,
+    answersGiven: 0,
+    adviceShared: 0,
+    upvotesReceived: 0,
+    acceptedAnswers: 0,
+    followers: 0,
+    following: 0,
+    emailNotifications: true,
+    publicProfile: true,
     createdAt: Timestamp.now(),
-  });
+    updatedAt: Timestamp.now(),
+  };
+
+  await setDoc(doc(db, 'users', userCredential.user.uid), userData);
   
   return userCredential.user;
 };
@@ -65,8 +106,14 @@ export const registerUser = async (
 /**
  * Sign in existing user
  */
-export const loginUser = async (email: string, password: string): Promise<User> => {
+export const loginUser = async (email: string, password: string): Promise<FirebaseUser> => {
   const userCredential = await signInWithEmailAndPassword(auth, email, password);
+  
+  // Update last login time
+  await updateDoc(doc(db, 'users', userCredential.user.uid), {
+    lastLoginAt: Timestamp.now(),
+  });
+  
   return userCredential.user;
 };
 
