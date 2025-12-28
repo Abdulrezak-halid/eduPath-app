@@ -1,11 +1,10 @@
-/**
- * Base Components Index
- *
- * Export all base components from a single entry point
- */
-
-export * from './CButton';
-export * from './CCard';
-export * from './CTextField';
-export * from './CLoading';
-export * from './CEmptyState';
+export { CButton } from './CButton';
+export { CCard } from './CCard';
+export { CTextField } from './CTextField';
+export { CLoading } from './CLoading';
+export { CEmptyState } from './CEmptyState';
+export { CBadge } from './CBadge';
+export { CDialog } from './CDialog';
+export { CChipInput } from './CChipInput';
+export { CSelect, type ICSelectOption } from './CSelect';
+export { CIconButton } from './CIconButton';
