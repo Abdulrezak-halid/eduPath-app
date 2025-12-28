@@ -111,5 +111,77 @@
   "footerContactTitle": "Bize Ulaşın",
   "footerContactEmail": "E-posta: contact@edupath.com",
   "footerContactPhone": "Telefon: +1 (555) 123-4567",
-  "footerRightsReserved": "Tüm hakları saklıdır."
+  "footerRightsReserved": "Tüm hakları saklıdır.",
+
+  "questions": {
+    "askQuestion": "Soru Sor",
+    "postQuestion": "Soruyu Gönder",
+    "cancel": "İptal",
+    "title": "Başlık",
+    "titlePlaceholder": "Sorunuz nedir?",
+    "titleHelper": "Açık ve net olun (10-200 karakter)",
+    "content": "İçerik",
+    "contentPlaceholder": "Sorunuzu ayrıntılı olarak açıklayın...",
+    "contentHelper": "Ayrıntılar ve bağlam ekleyin (20-10000 karakter)",
+    "major": "Bölüm",
+    "selectMajor": "Bölüm seçin",
+    "category": "Kategori",
+    "tags": "Etiketler",
+    "tagsHelper": "Başkalarının sorunuzu bulmasına yardımcı olması için etiketler ekleyin (1-5 etiket)",
+    "yourAnswer": "Cevabınız",
+    "answerPlaceholder": "Cevabınızı buraya yazın...",
+    "answerHelper": "Ayrıntılı ve yararlı bir cevap verin (20-10000 karakter)",
+    "postAnswer": "Cevabı Gönder",
+    "upvote": "Beğen",
+    "downvote": "Beğenme",
+    "markBestAnswer": "En iyi cevap olarak işaretle",
+    "unmarkBestAnswer": "En iyi cevap işaretini kaldır",
+    "errorCreating": "Soru oluşturulamadı",
+    "errorAnswering": "Cevap gönderilemedi"
+  },
+
+  "advice": {
+    "expertAdvice": "Uzman Tavsiyeleri",
+    "expertAdviceSubtitle": "Deneyimli öğrenciler ve profesyonellerden öğrenin",
+    "shareAdvice": "Tavsiyenizi Paylaşın",
+    "submitAdvice": "Tavsiye Gönder",
+    "searchPlaceholder": "Tavsiye ara...",
+    "allMajors": "Tüm Bölümler",
+    "allCategories": "Tüm Kategoriler",
+    "clearFilters": "Filtreleri Temizle",
+    "noAdviceFound": "Tavsiye Bulunamadı",
+    "noAdviceDescription": "Filtrelerinizi veya arama sorgunuzu ayarlamayı deneyin",
+    "errorLoading": "Tavsiyeler Yüklenirken Hata",
+    "itemsFound": "tavsiye bulundu",
+    "itemFound": "tavsiye bulundu",
+    "views": "görüntüleme",
+    "foundHelpful": "faydalı buldu",
+    "adviceTitle": "Tavsiyenize açık bir başlık verin (10-200 karakter)",
+    "adviceContent": "Deneyiminizi ve görüşlerinizi paylaşın (20-10000 karakter)",
+    "adviceTags": "Başkalarının tavsiyenizi bulmasına yardımcı olmak için ilgili etiketler ekleyin (1-5 etiket)"
+  },
+
+  "majors": {
+    "computerScience": "Bilgisayar Bilimleri",
+    "engineering": "Mühendislik",
+    "medicine": "Tıp",
+    "business": "İşletme",
+    "law": "Hukuk",
+    "arts": "Sanat",
+    "sciences": "Bilimler",
+    "education": "Eğitim",
+    "architecture": "Mimarlık",
+    "other": "Diğer"
+  },
+
+  "categories": {
+    "academic": "Akademik",
+    "career": "Kariyer",
+    "social": "Sosyal",
+    "financial": "Finansal",
+    "general": "Genel",
+    "timeManagement": "Zaman Yönetimi",
+    "studyTips": "Çalışma İpuçları",
+    "mentalHealth": "Ruh Sağlığı"
+  }
 }

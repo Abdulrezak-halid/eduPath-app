@@ -7,9 +7,9 @@
 import { FC } from 'react';
 import { TextField, TextFieldProps } from '@mui/material';
 
-export interface ICTextFieldProps extends TextFieldProps {
+export type ICTextFieldProps = TextFieldProps & {
   // Add custom props here if needed
-}
+};
 
 export const CTextField: FC<ICTextFieldProps> = (props) => {
   return (
