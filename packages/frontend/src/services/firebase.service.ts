@@ -1,6 +1,6 @@
 /**
  * Firebase Service Layer
- * 
+ *
  * This file provides service methods for all Firebase operations.
  * Uses TypeScript models for type safety and validation.
  */
@@ -26,9 +26,7 @@ import {
   orderBy,
   limit,
   Timestamp,
-  increment,
   setDoc,
-  writeBatch,
 } from 'firebase/firestore';
 import {
   ref,
@@ -38,24 +36,7 @@ import {
 } from 'firebase/storage';
 import type {
   User,
-  CreateUserInput,
-  UpdateUserInput,
-  Question,
-  CreateQuestionInput,
-  UpdateQuestionInput,
-  Answer,
-  CreateAnswerInput,
-  UpdateAnswerInput,
-  Advice,
-  CreateAdviceInput,
-  UpdateAdviceInput,
-  Notification,
-  CreateNotificationInput,
-  ReputationEvent,
-  CreateReputationEventInput,
-  ReputationAction,
 } from '../models';
-import { REPUTATION_POINTS } from '../models/firestore.models';
 
 // ============================================================================
 // Authentication Service
@@ -69,11 +50,15 @@ export const registerUser = async (
   password: string,
   displayName: string
 ): Promise<FirebaseUser> => {
-  const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-  
+  const userCredential = await createUserWithEmailAndPassword(
+    auth,
+    email,
+    password
+  );
+
   // Update profile with display name
   await updateProfile(userCredential.user, { displayName });
-  
+
   // Create user document in Firestore
   const userData: Omit<User, 'id'> = {
     uid: userCredential.user.uid,
@@ -99,21 +84,28 @@ export const registerUser = async (
   };
 
   await setDoc(doc(db, 'users', userCredential.user.uid), userData);
-  
+
   return userCredential.user;
 };
 
 /**
  * Sign in existing user
  */
-export const loginUser = async (email: string, password: string): Promise<FirebaseUser> => {
-  const userCredential = await signInWithEmailAndPassword(auth, email, password);
-  
+export const loginUser = async (
+  email: string,
+  password: string
+): Promise<FirebaseUser> => {
+  const userCredential = await signInWithEmailAndPassword(
+    auth,
+    email,
+    password
+  );
+
   // Update last login time
   await updateDoc(doc(db, 'users', userCredential.user.uid), {
     lastLoginAt: Timestamp.now(),
   });
-  
+
   return userCredential.user;
 };
 
@@ -152,10 +144,7 @@ export const questionsService = {
 
   // Get all questions
   async getAll() {
-    const q = query(
-      collection(db, 'questions'),
-      orderBy('createdAt', 'desc')
-    );
+    const q = query(collection(db, 'questions'), orderBy('createdAt', 'desc'));
     const querySnapshot = await getDocs(q);
     return querySnapshot.docs.map((doc) => ({
       id: doc.id,
@@ -181,7 +170,7 @@ export const questionsService = {
   async getById(questionId: string) {
     const docRef = doc(db, 'questions', questionId);
     const docSnap = await getDoc(docRef);
-    
+
     if (docSnap.exists()) {
       return {
         id: docSnap.id,
@@ -192,7 +181,10 @@ export const questionsService = {
   },
 
   // Update question
-  async update(questionId: string, data: Partial<{ title: string; content: string; tags: string[] }>) {
+  async update(
+    questionId: string,
+    data: Partial<{ title: string; content: string; tags: string[] }>
+  ) {
     const docRef = doc(db, 'questions', questionId);
     await updateDoc(docRef, {
       ...data,
@@ -212,11 +204,14 @@ export const questionsService = {
  */
 export const answersService = {
   // Add an answer to a question
-  async create(questionId: string, answerData: {
-    content: string;
-    authorId: string;
-    authorName: string;
-  }) {
+  async create(
+    questionId: string,
+    answerData: {
+      content: string;
+      authorId: string;
+      authorName: string;
+    }
+  ) {
     const answersRef = collection(db, 'questions', questionId, 'answers');
     const docRef = await addDoc(answersRef, {
       ...answerData,
@@ -342,7 +337,10 @@ export const uploadQuestionAttachment = async (
   questionId: string,
   file: File
 ): Promise<string> => {
-  const storageRef = ref(storage, `question-attachments/${questionId}/${file.name}`);
+  const storageRef = ref(
+    storage,
+    `question-attachments/${questionId}/${file.name}`
+  );
   await uploadBytes(storageRef, file);
   const downloadURL = await getDownloadURL(storageRef);
   return downloadURL;
