@@ -41,7 +41,7 @@ export const CVoteButtons: FC<ICVoteButtonsProps> = memo(
         }}
       >
         <CIconButton
-          tooltip={t('questions.upvote')}
+          tooltip={t('questionsUpvote')}
           onClick={() => handleVote('upvote')}
           disabled={voting}
           color={userVote === 'upvote' ? 'primary' : 'default'}
@@ -65,7 +65,7 @@ export const CVoteButtons: FC<ICVoteButtonsProps> = memo(
         </Typography>
 
         <CIconButton
-          tooltip={t('questions.downvote')}
+          tooltip={t('questionsDownvote')}
           onClick={() => handleVote('downvote')}
           disabled={voting}
           color={userVote === 'downvote' ? 'error' : 'default'}

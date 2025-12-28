@@ -38,7 +38,7 @@ export const CBaseModulePage = ({
         }
         subtitle={subtitle}
       />
-      <Container maxWidth="lg" sx={{ mt: 4, mb: 8, textDecoration: 'none' }}>
+      <Container maxWidth="lg" sx={{ py: 6, mb: 8 }}>
         <Box component="section">{children}</Box>
       </Container>
     </motion.div>
