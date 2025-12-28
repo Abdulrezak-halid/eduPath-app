@@ -111,5 +111,77 @@
   "footerContactTitle": "Contact Us",
   "footerContactEmail": "Email: contact@edupath.com",
   "footerContactPhone": "Phone: +1 (555) 123-4567",
-  "footerRightsReserved": "All rights reserved."
+  "footerRightsReserved": "All rights reserved.",
+
+  "questions": {
+    "askQuestion": "Ask a Question",
+    "postQuestion": "Post Question",
+    "cancel": "Cancel",
+    "title": "Title",
+    "titlePlaceholder": "What's your question?",
+    "titleHelper": "Be specific and clear (10-200 characters)",
+    "content": "Content",
+    "contentPlaceholder": "Describe your question in detail...",
+    "contentHelper": "Provide details and context (20-10000 characters)",
+    "major": "Major",
+    "selectMajor": "Select a major",
+    "category": "Category",
+    "tags": "Tags",
+    "tagsHelper": "Add tags to help others find your question (1-5 tags)",
+    "yourAnswer": "Your Answer",
+    "answerPlaceholder": "Write your answer here...",
+    "answerHelper": "Provide a detailed and helpful answer (20-10000 characters)",
+    "postAnswer": "Post Answer",
+    "upvote": "Upvote",
+    "downvote": "Downvote",
+    "markBestAnswer": "Mark as best answer",
+    "unmarkBestAnswer": "Unmark as best answer",
+    "errorCreating": "Failed to create question",
+    "errorAnswering": "Failed to submit answer"
+  },
+
+  "advice": {
+    "expertAdvice": "Expert Advice",
+    "expertAdviceSubtitle": "Learn from experienced students and professionals",
+    "shareAdvice": "Share Your Advice",
+    "submitAdvice": "Submit Advice",
+    "searchPlaceholder": "Search advice...",
+    "allMajors": "All Majors",
+    "allCategories": "All Categories",
+    "clearFilters": "Clear Filters",
+    "noAdviceFound": "No Advice Found",
+    "noAdviceDescription": "Try adjusting your filters or search query",
+    "errorLoading": "Error Loading Advice",
+    "itemsFound": "advice items found",
+    "itemFound": "advice item found",
+    "views": "views",
+    "foundHelpful": "found helpful",
+    "adviceTitle": "Give your advice a clear title (10-200 characters)",
+    "adviceContent": "Share your experience and insights (20-10000 characters)",
+    "adviceTags": "Add relevant tags to help others find your advice (1-5 tags)"
+  },
+
+  "majors": {
+    "computerScience": "Computer Science",
+    "engineering": "Engineering",
+    "medicine": "Medicine",
+    "business": "Business",
+    "law": "Law",
+    "arts": "Arts",
+    "sciences": "Sciences",
+    "education": "Education",
+    "architecture": "Architecture",
+    "other": "Other"
+  },
+
+  "categories": {
+    "academic": "Academic",
+    "career": "Career",
+    "social": "Social",
+    "financial": "Financial",
+    "general": "General",
+    "timeManagement": "Time Management",
+    "studyTips": "Study Tips",
+    "mentalHealth": "Mental Health"
+  }
 }
