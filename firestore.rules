@@ -1,0 +1,263 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // ============================================================================
+    // Helper Functions
+    // ============================================================================
+    
+    /**
+     * Check if user is authenticated
+     */
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    /**
+     * Check if user owns the document
+     */
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+    
+    /**
+     * Check if user is the author of the content
+     */
+    function isAuthor() {
+      return isAuthenticated() && request.auth.uid == resource.data.authorId;
+    }
+    
+    /**
+     * Check if user has admin role
+     */
+    function isAdmin() {
+      return isAuthenticated() && 
+             get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+    
+    /**
+     * Check if user has moderator role
+     */
+    function isModerator() {
+      return isAuthenticated() && 
+             get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['admin', 'moderator'];
+    }
+    
+    /**
+     * Check if content is active (not deleted or flagged)
+     */
+    function isActiveContent() {
+      return resource.data.status == 'active';
+    }
+    
+    /**
+     * Validate string field length
+     */
+    function isValidLength(field, minLen, maxLen) {
+      return field is string && 
+             field.size() >= minLen && 
+             field.size() <= maxLen;
+    }
+    
+    // ============================================================================
+    // Users Collection
+    // ============================================================================
+    
+    match /users/{userId} {
+      // Anyone can read active user profiles (for displaying author info)
+      allow read: if resource.data.isActive == true && resource.data.isBanned == false;
+      
+      // Users can create their own profile during registration
+      allow create: if isOwner(userId) &&
+                       request.resource.data.uid == userId &&
+                       request.resource.data.email == request.auth.token.email;
+      
+      // Users can only update their own profile
+      allow update: if isOwner(userId) &&
+                       // Prevent changing critical fields
+                       request.resource.data.uid == resource.data.uid &&
+                       request.resource.data.createdAt == resource.data.createdAt;
+      
+      // Only admins can delete users
+      allow delete: if isAdmin();
+      
+      // ============================================================================
+      // Notifications Subcollection
+      // ============================================================================
+      
+      match /notifications/{notificationId} {
+        // Users can only read their own notifications
+        allow read: if isOwner(userId);
+        
+        // Only backend/cloud functions can create notifications
+        allow create: if false;
+        
+        // Users can mark notifications as read
+        allow update: if isOwner(userId) &&
+                         // Can only update read/archived status
+                         request.resource.data.diff(resource.data).affectedKeys()
+                           .hasOnly(['isRead', 'isArchived', 'readAt', 'updatedAt']);
+        
+        // Users can delete their own notifications
+        allow delete: if isOwner(userId);
+      }
+      
+      // ============================================================================
+      // Reputation Subcollection
+      // ============================================================================
+      
+      match /reputation/{reputationId} {
+        // Users can read their own reputation history
+        allow read: if isOwner(userId);
+        
+        // Only backend/cloud functions can manage reputation
+        allow write: if false;
+      }
+      
+      // ============================================================================
+      // Bookmarks Subcollection
+      // ============================================================================
+      
+      match /bookmarks/{bookmarkId} {
+        // Users can manage their own bookmarks
+        allow read, write: if isOwner(userId);
+      }
+    }
+    
+    // ============================================================================
+    // Questions Collection
+    // ============================================================================
+    
+    match /questions/{questionId} {
+      // Anyone can read active questions
+      allow read: if isActiveContent();
+      
+      // Authenticated users can create questions
+      allow create: if isAuthenticated() &&
+                       request.resource.data.authorId == request.auth.uid &&
+                       isValidLength(request.resource.data.title, 10, 200) &&
+                       isValidLength(request.resource.data.content, 20, 10000) &&
+                       request.resource.data.tags.size() >= 1 &&
+                       request.resource.data.tags.size() <= 5 &&
+                       request.resource.data.status == 'active';
+      
+      // Authors can update their own questions
+      allow update: if (isAuthor() || isModerator()) &&
+                       // Prevent changing author
+                       request.resource.data.authorId == resource.data.authorId &&
+                       request.resource.data.createdAt == resource.data.createdAt;
+      
+      // Authors or moderators can delete
+      allow delete: if isAuthor() || isModerator();
+      
+      // ============================================================================
+      // Answers Subcollection
+      // ============================================================================
+      
+      match /answers/{answerId} {
+        // Anyone can read answers
+        allow read: if !resource.data.isDeleted;
+        
+        // Authenticated users can create answers
+        allow create: if isAuthenticated() &&
+                         request.resource.data.authorId == request.auth.uid &&
+                         isValidLength(request.resource.data.content, 20, 10000) &&
+                         request.resource.data.isAccepted == false &&
+                         request.resource.data.isDeleted == false;
+        
+        // Authors can update their own answers
+        // Question author can mark answer as accepted
+        allow update: if (isAuthor() || isModerator()) &&
+                         request.resource.data.authorId == resource.data.authorId;
+        
+        // Authors or moderators can delete
+        allow delete: if isAuthor() || isModerator();
+      }
+    }
+    
+    // ============================================================================
+    // Advice Collection
+    // ============================================================================
+    
+    match /advice/{adviceId} {
+      // Anyone can read active advice
+      allow read: if isActiveContent();
+      
+      // Authenticated users can create advice
+      allow create: if isAuthenticated() &&
+                       request.resource.data.authorId == request.auth.uid &&
+                       isValidLength(request.resource.data.title, 10, 200) &&
+                       isValidLength(request.resource.data.content, 20, 10000) &&
+                       request.resource.data.tags.size() >= 1 &&
+                       request.resource.data.tags.size() <= 5 &&
+                       request.resource.data.status == 'active';
+      
+      // Authors can update their own advice
+      allow update: if (isAuthor() || isModerator()) &&
+                       request.resource.data.authorId == resource.data.authorId &&
+                       request.resource.data.createdAt == resource.data.createdAt;
+      
+      // Authors or moderators can delete
+      allow delete: if isAuthor() || isModerator();
+    }
+    
+    // ============================================================================
+    // Modules Collection (Admin Only Write)
+    // ============================================================================
+    
+    match /modules/{moduleId} {
+      // Anyone can read published modules
+      allow read: if resource.data.isPublished == true;
+      
+      // Only admins can manage modules
+      allow write: if isAdmin();
+    }
+    
+    // ============================================================================
+    // Votes Collection
+    // ============================================================================
+    
+    match /votes/{voteId} {
+      // Anyone can read votes
+      allow read: if true;
+      
+      // Authenticated users can create/update their own votes
+      allow create, update: if isAuthenticated() &&
+                               request.resource.data.userId == request.auth.uid;
+      
+      // Users can delete their own votes
+      allow delete: if isAuthenticated() &&
+                       resource.data.userId == request.auth.uid;
+    }
+    
+    // ============================================================================
+    // Comments Collection
+    // ============================================================================
+    
+    match /comments/{commentId} {
+      // Anyone can read non-deleted comments
+      allow read: if !resource.data.isDeleted;
+      
+      // Authenticated users can create comments
+      allow create: if isAuthenticated() &&
+                       request.resource.data.authorId == request.auth.uid &&
+                       isValidLength(request.resource.data.content, 1, 1000);
+      
+      // Authors can update their own comments
+      allow update: if (isAuthor() || isModerator()) &&
+                       request.resource.data.authorId == resource.data.authorId;
+      
+      // Authors or moderators can delete
+      allow delete: if isAuthor() || isModerator();
+    }
+    
+    // ============================================================================
+    // Default: Deny All
+    // ============================================================================
+    
+    // Deny access to any other collections
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
