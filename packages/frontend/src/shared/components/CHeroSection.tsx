@@ -12,9 +12,9 @@ interface ICHeroSectionProps {
 
 const HeroWrapper = styled(Box)(({ theme }) => ({
   background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
-  color: theme.palette.primary.contrastText,
+  color: '#ffffff',
   padding: theme.spacing(12, 0),
-  marginBottom: theme.spacing(6),
+  marginBottom: 0,
   position: 'relative',
   overflow: 'hidden',
   '&::before': {
@@ -62,6 +62,7 @@ export const CHeroSection = ({
               fontSize: { xs: '2.5rem', md: '3.5rem' },
               fontWeight: 700,
               marginBottom: theme.spacing(2),
+              color: '#ffffff',
             }}
           >
             {title}
@@ -76,8 +77,9 @@ export const CHeroSection = ({
             variant="h5"
             sx={{
               marginBottom: theme.spacing(4),
-              opacity: 0.9,
+              opacity: 0.95,
               fontSize: { xs: '1.2rem', md: '1.5rem' },
+              color: '#ffffff',
             }}
           >
             {subtitle}
