@@ -14,7 +14,7 @@ import { CAdvicePage } from './modules/advice/pages/CAdvicePage';
 import { CPersonalDevelopmentModule } from './modules/personal-development/pages/CPersonalDevelopmentModule';
 import { CStudySkillsModule } from './modules/study-skills/pages/CStudySkillsModule';
 import { CUniversityLifeModule } from './modules/university-life/pages/CUniversityLifeModule';
-import { CQuestionsPage } from './modules/questions/pages/CQuestionsPage';
+import CQuestionsListPage from './modules/questions/pages/CQuestionsListPage';
 import { CAboutPage } from './modules/about/pages/CAboutPage';
 
 const App = (): JSX.Element => {
@@ -47,7 +47,7 @@ const App = (): JSX.Element => {
               element={<CFinancialPlanningModule />}
             />
             <Route path="/advice" element={<CAdvicePage />} />
-            <Route path="/questions" element={<CQuestionsPage />} />
+            <Route path="/questions" element={<CQuestionsListPage />} />
             <Route path="/about" element={<CAboutPage />} />
           </Routes>
         </CMainLayout>
