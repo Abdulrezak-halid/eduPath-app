@@ -41,7 +41,7 @@ export const CAnswerSubmit: FC<ICAnswerSubmitProps> = ({
     } catch (err) {
       console.error('Error creating answer:', err);
       setSubmitError(
-        err instanceof Error ? err.message : t('questions.errorAnswering')
+        err instanceof Error ? err.message : t('questionsErrorAnswering')
       );
     } finally {
       setLoading(false);
@@ -51,7 +51,7 @@ export const CAnswerSubmit: FC<ICAnswerSubmitProps> = ({
   return (
     <Paper elevation={1} sx={{ p: 3, mt: 3 }}>
       <Typography variant="h6" gutterBottom>
-        {t('questions.yourAnswer')}
+        {t('questionsYourAnswer')}
       </Typography>
 
       {submitError && (
@@ -72,9 +72,9 @@ export const CAnswerSubmit: FC<ICAnswerSubmitProps> = ({
           }
           error={!!error}
           helperText={
-            error || t('questions.answerHelper')
+            error || t('questionsAnswerHelper')
           }
-          placeholder={t('questions.answerPlaceholder')}
+          placeholder={t('questionsAnswerPlaceholder')}
           multiline
           rows={8}
           disabled={loading}
@@ -86,7 +86,7 @@ export const CAnswerSubmit: FC<ICAnswerSubmitProps> = ({
             loading={loading}
             disabled={!content.trim()}
           >
-            {t('questions.postAnswer')}
+            {t('questionsPostAnswer')}
           </CButton>
         </Box>
       </Box>

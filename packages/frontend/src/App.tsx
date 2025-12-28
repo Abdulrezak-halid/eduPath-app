@@ -10,7 +10,7 @@ import './i18n';
 import { theme } from './theme';
 import { CCareerGuidanceModule } from './modules/career-guidance/pages/CCareerGuidanceModule';
 import { CFinancialPlanningModule } from './modules/financial-planning/pages/CFinancialPlanningModule';
-import { CAdvicePage } from './modules/advice/pages/CAdvicePage';
+import { CAdviceListPage } from './modules/advice/pages/CAdviceListPage';
 import { CPersonalDevelopmentModule } from './modules/personal-development/pages/CPersonalDevelopmentModule';
 import { CStudySkillsModule } from './modules/study-skills/pages/CStudySkillsModule';
 import { CUniversityLifeModule } from './modules/university-life/pages/CUniversityLifeModule';
@@ -46,7 +46,7 @@ const App = (): JSX.Element => {
               path="/financial-planning"
               element={<CFinancialPlanningModule />}
             />
-            <Route path="/advice" element={<CAdvicePage />} />
+            <Route path="/advice" element={<CAdviceListPage />} />
             <Route path="/questions" element={<CQuestionsListPage />} />
             <Route path="/about" element={<CAboutPage />} />
           </Routes>

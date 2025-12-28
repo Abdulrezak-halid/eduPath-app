@@ -21,6 +21,7 @@ import {
   CardContent,
   CardActionArea,
   Avatar,
+  Button,
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import FilterListIcon from '@mui/icons-material/FilterList';
@@ -31,6 +32,7 @@ import { formatDistanceToNow } from 'date-fns';
 import { IQuestionFilters, useQuestions } from '@/shared/hooks/useQuestions';
 import { MajorField } from '@/models';
 import { CHeroSection } from '@/shared/components/CHeroSection';
+import { CAskQuestionDialog } from '../components/CAskQuestionDialog';
 
 const CQuestionsListPage = () => {
   const { t } = useTranslation();
@@ -39,6 +41,7 @@ const CQuestionsListPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedMajor, setSelectedMajor] = useState<MajorField | ''>('');
   const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   const filters: IQuestionFilters = useMemo(() => {
     const f: IQuestionFilters = {};
@@ -48,8 +51,13 @@ const CQuestionsListPage = () => {
     return f;
   }, [searchQuery, selectedMajor, selectedCategory]);
 
-  const { questions, loading, error } = useQuestions(filters);
-
+  const { questions, loading, error, refetch } = useQuestions(filters);
+  const handleOpenDialog = () => setDialogOpen(true);
+  const handleCloseDialog = () => setDialogOpen(false);
+  const handleQuestionSubmitted = () => {
+    refetch();
+    setDialogOpen(false);
+  };
   const majors: Array<{ value: MajorField; label: string }> = [
     {
       value: 'computer-science',
@@ -94,12 +102,22 @@ const CQuestionsListPage = () => {
   return (
     <Box>
       <CHeroSection
-        title={t('questions.title') || 'Questions'}
+        title={t('questionsTitle') || 'Questions'}
         subtitle={
-          t('questions.subtitle') ||
+          t('questionsSubtitle') ||
           'Ask questions and get answers from experienced students'
         }
-      />
+      >
+        <Button
+          variant="contained"
+          color="secondary"
+          size="large"
+          onClick={handleOpenDialog}
+          sx={{ mt: 2 }}
+        >
+          {t('questionsAskQuestion')}
+        </Button>
+      </CHeroSection>
 
       <Container maxWidth="lg" sx={{ py: 6 }}>
         {/* Search and Filters */}
@@ -110,7 +128,7 @@ const CQuestionsListPage = () => {
               <TextField
                 fullWidth
                 placeholder={
-                  t('questions.searchPlaceholder') || 'Search questions...'
+                  t('questionsSearchPlaceholder') || 'Search questions...'
                 }
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -129,7 +147,7 @@ const CQuestionsListPage = () => {
               <TextField
                 select
                 fullWidth
-                label={t('questions.filterByMajor') || 'Filter by Major'}
+                label={t('questionsFilterByMajor') || 'Filter by Major'}
                 value={selectedMajor}
                 onChange={(e) =>
                   setSelectedMajor(e.target.value as MajorField | '')
@@ -143,7 +161,7 @@ const CQuestionsListPage = () => {
                 }}
               >
                 <MenuItem value="">
-                  <em>{t('questions.allMajors') || 'All Majors'}</em>
+                  <em>{t('questionsAllMajors') || 'All Majors'}</em>
                 </MenuItem>
                 {majors.map((major) => (
                   <MenuItem key={major.value} value={major.value}>
@@ -158,7 +176,7 @@ const CQuestionsListPage = () => {
               <TextField
                 select
                 fullWidth
-                label={t('questions.filterByCategory') || 'Filter by Category'}
+                label={t('questionsFilterByCategory') || 'Filter by Category'}
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
                 InputProps={{
@@ -170,7 +188,7 @@ const CQuestionsListPage = () => {
                 }}
               >
                 <MenuItem value="">
-                  <em>{t('questions.allCategories') || 'All Categories'}</em>
+                  <em>{t('questionsAllCategories') || 'All Categories'}</em>
                 </MenuItem>
                 {categories.map((category) => (
                   <MenuItem key={category.value} value={category.value}>
@@ -233,10 +251,10 @@ const CQuestionsListPage = () => {
             {questions.length === 0 ? (
               <Box textAlign="center" py={8}>
                 <Typography variant="h6" color="text.secondary" gutterBottom>
-                  {t('questions.noQuestions') || 'No questions found'}
+                  {t('questionsNoQuestions') || 'No questions found'}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {t('questions.tryDifferentFilters') ||
+                  {t('questionsTryDifferentFilters') ||
                     'Try adjusting your filters or search query'}
                 </Typography>
               </Box>
@@ -396,7 +414,7 @@ const CQuestionsListPage = () => {
             {questions.length > 0 && (
               <Box textAlign="center" mt={4}>
                 <Typography variant="body2" color="text.secondary">
-                  {t('questions.showing') || 'Showing'} {questions.length}{' '}
+                  {t('questionsShowing') || 'Showing'} {questions.length}{' '}
                   {questions.length === 1 ? 'question' : 'questions'}
                 </Typography>
               </Box>
@@ -404,6 +422,12 @@ const CQuestionsListPage = () => {
           </>
         )}
       </Container>
+
+      <CAskQuestionDialog
+        open={dialogOpen}
+        onClose={handleCloseDialog}
+        onSuccess={handleQuestionSubmitted}
+      />
     </Box>
   );
 };

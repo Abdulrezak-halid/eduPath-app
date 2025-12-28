@@ -23,6 +23,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 import { CHeroSection } from '../../../shared/components/CHeroSection';
+import { CSubmitAdviceDialog } from '../components/CSubmitAdviceDialog';
 import {
   useAdvice,
   IAdviceFilters,
@@ -44,32 +45,33 @@ export const CAdviceListPage: FC = () => {
   const navigate = useNavigate();
 
   const MAJOR_OPTIONS: ICSelectOption[] = [
-    { value: '', label: t('advice.allMajors') },
-    { value: 'computer-science', label: t('majors.computerScience') },
-    { value: 'engineering', label: t('majors.engineering') },
-    { value: 'medicine', label: t('majors.medicine') },
-    { value: 'business', label: t('majors.business') },
-    { value: 'law', label: t('majors.law') },
-    { value: 'arts', label: t('majors.arts') },
-    { value: 'sciences', label: t('majors.sciences') },
-    { value: 'education', label: t('majors.education') },
-    { value: 'architecture', label: t('majors.architecture') },
-    { value: 'other', label: t('majors.other') },
+    { value: '', label: t('adviceAllMajors') },
+    { value: 'computer-science', label: t('majorsComputerScience') },
+    { value: 'engineering', label: t('majorsEngineering') },
+    { value: 'medicine', label: t('majorsMedicine') },
+    { value: 'business', label: t('majorsBusiness') },
+    { value: 'law', label: t('majorsLaw') },
+    { value: 'arts', label: t('majorsArts') },
+    { value: 'sciences', label: t('majorsSciences') },
+    { value: 'education', label: t('majorsEducation') },
+    { value: 'architecture', label: t('majorsArchitecture') },
+    { value: 'other', label: t('majorsOther') },
   ];
 
   const CATEGORY_OPTIONS: ICSelectOption[] = [
-    { value: '', label: t('advice.allCategories') },
-    { value: 'time-management', label: t('categories.timeManagement') },
-    { value: 'study-tips', label: t('categories.studyTips') },
-    { value: 'career', label: t('categories.career') },
-    { value: 'social', label: t('categories.social') },
-    { value: 'mental-health', label: t('categories.mentalHealth') },
-    { value: 'general', label: t('categories.general') },
+    { value: '', label: t('adviceAllCategories') },
+    { value: 'time-management', label: t('categoriesTimeManagement') },
+    { value: 'study-tips', label: t('categoriesStudyTips') },
+    { value: 'career', label: t('categoriesCareer') },
+    { value: 'social', label: t('categoriesSocial') },
+    { value: 'mental-health', label: t('categoriesMentalHealth') },
+    { value: 'general', label: t('categoriesGeneral') },
   ];
   const [filters, setFilters] = useState<IAdviceFilters>({});
   const [searchInput, setSearchInput] = useState('');
+  const [dialogOpen, setDialogOpen] = useState(false);
 
-  const { advice, loading, error } = useAdvice(filters);
+  const { advice, loading, error, refetch } = useAdvice(filters);
 
   const handleSearch = useCallback(() => {
     setFilters((prev) => ({ ...prev, searchQuery: searchInput }));
@@ -90,6 +92,19 @@ export const CAdviceListPage: FC = () => {
     setSearchInput('');
   }, []);
 
+  const handleOpenDialog = useCallback(() => {
+    setDialogOpen(true);
+  }, []);
+
+  const handleCloseDialog = useCallback(() => {
+    setDialogOpen(false);
+  }, []);
+
+  const handleAdviceSubmitted = useCallback(() => {
+    refetch();
+    setDialogOpen(false);
+  }, [refetch]);
+
   const activeFiltersCount =
     (filters.major ? 1 : 0) +
     (filters.category ? 1 : 0) +
@@ -98,9 +113,18 @@ export const CAdviceListPage: FC = () => {
   return (
     <Box>
       <CHeroSection
-        title={t('advice.expertAdvice')}
-        subtitle={t('advice.expertAdviceSubtitle')}
-      />
+        title={t('adviceExpertAdvice')}
+        subtitle={t('adviceExpertAdviceSubtitle')}
+      >
+        <CButton
+          variant="primary"
+          size="large"
+          onClick={handleOpenDialog}
+          sx={{ mt: 2 }}
+        >
+          {t('adviceShareAdvice')}
+        </CButton>
+      </CHeroSection>
 
       <Container maxWidth="lg" sx={{ py: 4 }}>
         {/* Search and Filters */}
@@ -108,7 +132,7 @@ export const CAdviceListPage: FC = () => {
           <Grid container spacing={2} alignItems="center">
             <Grid item xs={12} md={4}>
               <CTextField
-                placeholder={t('advice.searchPlaceholder')}
+                placeholder={t('adviceSearchPlaceholder')}
                 value={searchInput}
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   setSearchInput(e.target.value)
@@ -154,7 +178,7 @@ export const CAdviceListPage: FC = () => {
             <Grid item xs={12} md={2}>
               {activeFiltersCount > 0 && (
                 <CButton fullWidth onClick={handleClearFilters}>
-                  {t('advice.clearFilters')}
+                  {t('adviceClearFilters')}
                 </CButton>
               )}
             </Grid>
@@ -189,23 +213,23 @@ export const CAdviceListPage: FC = () => {
 
         {/* Results */}
         {loading ? (
-          <CLoading message={t('advice.errorLoading')} />
+          <CLoading message={t('adviceErrorLoading')} />
         ) : error ? (
           <CEmptyState
-            title={t('advice.errorLoading')}
+            title={t('adviceErrorLoading')}
             description={error.message}
             icon={<SearchIcon sx={{ fontSize: 64 }} />}
           />
         ) : advice.length === 0 ? (
           <CEmptyState
-            title={t('advice.noAdviceFound')}
-            description={t('advice.noAdviceDescription')}
+            title={t('adviceNoAdviceFound')}
+            description={t('adviceNoAdviceDescription')}
             icon={<SearchIcon sx={{ fontSize: 64 }} />}
           />
         ) : (
           <Stack spacing={2}>
             <Typography variant="body2" color="text.secondary">
-              {advice.length} {advice.length === 1 ? t('advice.itemFound') : t('advice.itemsFound')}
+              {advice.length} {advice.length === 1 ? t('adviceItemFound') : t('adviceItemsFound')}
             </Typography>
 
             {advice.map((item) => (
@@ -264,12 +288,12 @@ export const CAdviceListPage: FC = () => {
                     >
                       <VisibilityIcon fontSize="small" color="action" />
                       <Typography variant="body2">
-                        {item.views} {t('advice.views')}
+                        {item.views} {t('adviceViews')}
                       </Typography>
                     </Box>
 
                     <Typography variant="body2" color="text.secondary">
-                      {item.helpfulCount} {t('advice.foundHelpful')}
+                      {item.helpfulCount} {t('adviceFoundHelpful')}
                     </Typography>
 
                     <Typography
@@ -286,6 +310,12 @@ export const CAdviceListPage: FC = () => {
           </Stack>
         )}
       </Container>
+
+      <CSubmitAdviceDialog
+        open={dialogOpen}
+        onClose={handleCloseDialog}
+        onSuccess={handleAdviceSubmitted}
+      />
     </Box>
   );
 };

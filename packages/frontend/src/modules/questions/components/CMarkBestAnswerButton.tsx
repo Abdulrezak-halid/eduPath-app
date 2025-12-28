@@ -64,7 +64,7 @@ export const CMarkBestAnswerButton: FC<ICMarkBestAnswerButtonProps> = memo(
           </Alert>
         )}
         <CIconButton
-          tooltip={isAccepted ? t('questions.unmarkBestAnswer') : t('questions.markBestAnswer')}
+          tooltip={isAccepted ? t('questionsUnmarkBestAnswer') : t('questionsMarkBestAnswer')}
           onClick={handleToggle}
           disabled={loading}
           color={isAccepted ? 'success' : 'default'}

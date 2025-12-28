@@ -32,25 +32,25 @@ export const CSubmitAdviceDialog: FC<ICSubmitAdviceDialogProps> = ({
   const { t } = useTranslation();
 
   const MAJOR_OPTIONS: ICSelectOption[] = [
-    { value: 'computer-science', label: t('majors.computerScience') },
-    { value: 'engineering', label: t('majors.engineering') },
-    { value: 'medicine', label: t('majors.medicine') },
-    { value: 'business', label: t('majors.business') },
-    { value: 'law', label: t('majors.law') },
-    { value: 'arts', label: t('majors.arts') },
-    { value: 'sciences', label: t('majors.sciences') },
-    { value: 'education', label: t('majors.education') },
-    { value: 'architecture', label: t('majors.architecture') },
-    { value: 'other', label: t('majors.other') },
+    { value: 'computer-science', label: t('majorsComputerScience') },
+    { value: 'engineering', label: t('majorsEngineering') },
+    { value: 'medicine', label: t('majorsMedicine') },
+    { value: 'business', label: t('majorsBusiness') },
+    { value: 'law', label: t('majorsLaw') },
+    { value: 'arts', label: t('majorsArts') },
+    { value: 'sciences', label: t('majorsSciences') },
+    { value: 'education', label: t('majorsEducation') },
+    { value: 'architecture', label: t('majorsArchitecture') },
+    { value: 'other', label: t('majorsOther') },
   ];
 
   const CATEGORY_OPTIONS: ICSelectOption[] = [
-    { value: 'time-management', label: t('categories.timeManagement') },
-    { value: 'study-tips', label: t('categories.studyTips') },
-    { value: 'career', label: t('categories.career') },
-    { value: 'social', label: t('categories.social') },
-    { value: 'mental-health', label: t('categories.mentalHealth') },
-    { value: 'general', label: t('categories.general') },
+    { value: 'time-management', label: t('categoriesTimeManagement') },
+    { value: 'study-tips', label: t('categoriesStudyTips') },
+    { value: 'career', label: t('categoriesCareer') },
+    { value: 'social', label: t('categoriesSocial') },
+    { value: 'mental-health', label: t('categoriesMentalHealth') },
+    { value: 'general', label: t('categoriesGeneral') },
   ];
   const [formData, setFormData] = useState<IAdviceFormData>({
     title: '',
@@ -124,16 +124,16 @@ export const CSubmitAdviceDialog: FC<ICSubmitAdviceDialogProps> = ({
     <CDialog
       open={open}
       onClose={handleCancel}
-      title={t('advice.shareAdvice')}
+      title={t('adviceShareAdvice')}
       maxWidth="md"
       fullWidth
       actions={
         <>
           <CButton onClick={handleCancel} disabled={loading}>
-            {t('questions.cancel')}
+            {t('questionsCancel')}
           </CButton>
           <CButton onClick={handleSubmit} loading={loading}>
-            {t('advice.submitAdvice')}
+            {t('adviceSubmitAdvice')}
           </CButton>
         </>
       }
@@ -146,31 +146,31 @@ export const CSubmitAdviceDialog: FC<ICSubmitAdviceDialogProps> = ({
         )}
 
         <CTextField
-          label={t('questions.title')}
+          label={t('questionsFieldTitle')}
           value={formData.title}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             handleChange('title', e.target.value)
           }
           error={!!errors.title}
           helperText={
-            errors.title || t('advice.adviceTitle')
+            errors.title || t('adviceAdviceTitle')
           }
-          placeholder={t('questions.titlePlaceholder')}
+          placeholder={t('questionsTitlePlaceholder')}
           required
           disabled={loading}
         />
 
         <CTextField
-          label={t('questions.content')}
+          label={t('questionsContent')}
           value={formData.content}
           onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
             handleChange('content', e.target.value)
           }
           error={!!errors.content}
           helperText={
-            errors.content || t('advice.adviceContent')
+            errors.content || t('adviceAdviceContent')
           }
-          placeholder={t('questions.contentPlaceholder')}
+          placeholder={t('questionsContentPlaceholder')}
           multiline
           rows={8}
           required
@@ -179,26 +179,26 @@ export const CSubmitAdviceDialog: FC<ICSubmitAdviceDialogProps> = ({
 
         <Box sx={{ display: 'flex', gap: 2 }}>
           <CSelect
-            label={t('questions.major')}
+            label={t('questionsMajor')}
             value={formData.major}
             onChange={(e) => handleChange('major', e.target.value)}
             error={!!errors.major}
             helperText={errors.major}
             options={MAJOR_OPTIONS}
-            emptyLabel={t('questions.selectMajor')}
+            emptyLabel={t('questionsSelectMajor')}
             required
             disabled={loading}
             sx={{ flex: 1 }}
           />
 
           <CSelect
-            label={t('questions.category')}
+            label={t('questionsCategory')}
             value={formData.category}
             onChange={(e) => handleChange('category', e.target.value)}
             error={!!errors.category}
             helperText={errors.category}
             options={CATEGORY_OPTIONS}
-            emptyLabel={t('questions.selectMajor')}
+            emptyLabel={t('questionsSelectMajor')}
             required
             disabled={loading}
             sx={{ flex: 1 }}
@@ -206,12 +206,12 @@ export const CSubmitAdviceDialog: FC<ICSubmitAdviceDialogProps> = ({
         </Box>
 
         <CChipInput
-          label={t('questions.tags')}
+          label={t('questionsTags')}
           value={formData.tags}
           onChange={(tags) => handleChange('tags', tags)}
           error={!!errors.tags}
           helperText={
-            errors.tags || t('advice.adviceTags')
+            errors.tags || t('adviceAdviceTags')
           }
           maxItems={5}
           disabled={loading}

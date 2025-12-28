@@ -33,24 +33,24 @@ export const CAskQuestionDialog: FC<ICAskQuestionDialogProps> = ({
   const { t } = useTranslation();
 
   const MAJOR_OPTIONS: ICSelectOption[] = [
-    { value: 'computer-science', label: t('majors.computerScience') },
-    { value: 'engineering', label: t('majors.engineering') },
-    { value: 'medicine', label: t('majors.medicine') },
-    { value: 'business', label: t('majors.business') },
-    { value: 'law', label: t('majors.law') },
-    { value: 'arts', label: t('majors.arts') },
-    { value: 'sciences', label: t('majors.sciences') },
-    { value: 'education', label: t('majors.education') },
-    { value: 'architecture', label: t('majors.architecture') },
-    { value: 'other', label: t('majors.other') },
+    { value: 'computer-science', label: t('majorsComputerScience') },
+    { value: 'engineering', label: t('majorsEngineering') },
+    { value: 'medicine', label: t('majorsMedicine') },
+    { value: 'business', label: t('majorsBusiness') },
+    { value: 'law', label: t('majorsLaw') },
+    { value: 'arts', label: t('majorsArts') },
+    { value: 'sciences', label: t('majorsSciences') },
+    { value: 'education', label: t('majorsEducation') },
+    { value: 'architecture', label: t('majorsArchitecture') },
+    { value: 'other', label: t('majorsOther') },
   ];
 
   const CATEGORY_OPTIONS: ICSelectOption[] = [
-    { value: 'academic', label: t('categories.academic') },
-    { value: 'career', label: t('categories.career') },
-    { value: 'social', label: t('categories.social') },
-    { value: 'financial', label: t('categories.financial') },
-    { value: 'general', label: t('categories.general') },
+    { value: 'academic', label: t('categoriesAcademic') },
+    { value: 'career', label: t('categoriesCareer') },
+    { value: 'social', label: t('categoriesSocial') },
+    { value: 'financial', label: t('categoriesFinancial') },
+    { value: 'general', label: t('categoriesGeneral') },
   ];
 
   const [formData, setFormData] = useState<IQuestionFormData>({
@@ -101,7 +101,7 @@ export const CAskQuestionDialog: FC<ICAskQuestionDialogProps> = ({
     } catch (error) {
       console.error('Error creating question:', error);
       setSubmitError(
-        error instanceof Error ? error.message : t('questions.errorCreating')
+        error instanceof Error ? error.message : t('questionsErrorCreating')
       );
     } finally {
       setLoading(false);
@@ -125,16 +125,16 @@ export const CAskQuestionDialog: FC<ICAskQuestionDialogProps> = ({
     <CDialog
       open={open}
       onClose={handleCancel}
-      title={t('questions.askQuestion')}
+      title={t('questionsAskQuestion')}
       maxWidth="md"
       fullWidth
       actions={
         <>
           <CButton onClick={handleCancel} disabled={loading}>
-            {t('questions.cancel')}
+            {t('questionsCancel')}
           </CButton>
           <CButton onClick={handleSubmit} loading={loading}>
-            {t('questions.postQuestion')}
+            {t('questionsPostQuestion')}
           </CButton>
         </>
       }
@@ -147,31 +147,31 @@ export const CAskQuestionDialog: FC<ICAskQuestionDialogProps> = ({
         )}
 
         <CTextField
-          label={t('questions.title')}
+          label={t('questionsFieldTitle')}
           value={formData.title}
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             handleChange('title', e.target.value)
           }
           error={!!errors.title}
           helperText={
-            errors.title || t('questions.titleHelper')
+            errors.title || t('questionsTitleHelper')
           }
-          placeholder={t('questions.titlePlaceholder')}
+          placeholder={t('questionsTitlePlaceholder')}
           required
           disabled={loading}
         />
 
         <CTextField
-          label={t('questions.content')}
+          label={t('questionsContent')}
           value={formData.content}
           onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
             handleChange('content', e.target.value)
           }
           error={!!errors.content}
           helperText={
-            errors.content || t('questions.contentHelper')
+            errors.content || t('questionsContentHelper')
           }
-          placeholder={t('questions.contentPlaceholder')}
+          placeholder={t('questionsContentPlaceholder')}
           multiline
           rows={6}
           required
@@ -180,7 +180,7 @@ export const CAskQuestionDialog: FC<ICAskQuestionDialogProps> = ({
 
         <Box sx={{ display: 'flex', gap: 2 }}>
           <CSelect
-            label={t('questions.major')}
+            label={t('questionsMajor')}
             value={formData.major || ''}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               handleChange('major', e.target.value as MajorField)
@@ -188,13 +188,13 @@ export const CAskQuestionDialog: FC<ICAskQuestionDialogProps> = ({
             error={!!errors.major}
             helperText={errors.major}
             options={MAJOR_OPTIONS}
-            emptyLabel={t('questions.selectMajor')}
+            emptyLabel={t('questionsSelectMajor')}
             disabled={loading}
             sx={{ flex: 1 }}
           />
 
           <CSelect
-            label={t('questions.category')}
+            label={t('questionsCategory')}
             value={formData.category}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               handleChange(
@@ -212,12 +212,12 @@ export const CAskQuestionDialog: FC<ICAskQuestionDialogProps> = ({
         </Box>
 
         <CChipInput
-          label={t('questions.tags')}
+          label={t('questionsTags')}
           value={formData.tags}
           onChange={(tags) => handleChange('tags', tags)}
           error={!!errors.tags}
           helperText={
-            errors.tags || t('questions.tagsHelper')
+            errors.tags || t('questionsTagsHelper')
           }
           maxItems={5}
           disabled={loading}
