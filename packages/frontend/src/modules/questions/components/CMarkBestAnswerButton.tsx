@@ -33,10 +33,8 @@ export const CMarkBestAnswerButton: FC<ICMarkBestAnswerButtonProps> = memo(
 
       try {
         if (isAccepted) {
-          // Unmark as accepted - just update answer
           await answersService.unmarkAsAccepted(questionId, answerId);
         } else {
-          // Mark as accepted
           await answersService.markAsAccepted(questionId, answerId);
           await questionsService.markAnswerAsAccepted(questionId, answerId);
         }
