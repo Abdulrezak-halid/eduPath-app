@@ -94,21 +94,34 @@ npm run dev
 
 ```
 edupath-app/
+├── .github/
+│   └── copilot-instructions.md   # AI coding guidelines
 ├── packages/
-│   ├── frontend/           # React frontend application
+│   ├── frontend/                 # React frontend (Vite + TypeScript)
 │   │   ├── src/
-│   │   │   ├── modules/    # Feature modules
-│   │   │   ├── shared/     # Shared components and utilities
-│   │   │   └── locales/    # i18n translation files
-│   │   └── public/         # Static assets
+│   │   │   ├── base/            # Base components (CButton, CCard)
+│   │   │   ├── shared/          # Shared components (CMainLayout)
+│   │   │   ├── modules/         # Feature modules
+│   │   │   │   ├── questions/  # Q&A system
+│   │   │   │   ├── advice/     # Advice sharing
+│   │   │   │   └── ...         # Other modules
+│   │   │   ├── services/       # Firebase services
+│   │   │   ├── models/         # TypeScript models
+│   │   │   └── locales/        # i18n (en, tr)
+│   │   ├── public/             # Static assets
+│   │   ├── firebase.ts         # Firebase client config
+│   │   └── README.md           # Frontend documentation
 │   │
-│   └── backend/            # Node.js backend application
-│       ├── src/
-│       │   ├── controllers/
-│       │   ├── models/
-│       │   └── services/
-│       └── tests/
-└── docs/                   # Documentation
+│   └── backend/                 # Firebase backend configuration
+│       ├── firebase.json        # Firebase config
+│       ├── firestore.rules      # Database security rules
+│       ├── storage.rules        # Storage security rules
+│       ├── .firebaserc          # Firebase project config
+│       ├── src/                 # Future Node.js server
+│       └── README.md            # Backend documentation
+│
+├── package.json                 # Root workspace scripts
+└── README.md                    # This file
 ```
 
 ## 🛠️ Technology Stack
@@ -123,11 +136,13 @@ edupath-app/
 - **Framer Motion** - Animations
 
 ### Backend
-- **Node.js** - Runtime environment
+- **Firebase** - Backend as a Service
+  - **Firestore** - NoSQL database
+  - **Firebase Auth** - User authentication  
+  - **Firebase Storage** - File storage
+  - **Firebase Hosting** - Frontend deployment
+- **Node.js** - Runtime (planned for future custom server)
 - **TypeScript** - Type safety
-- **Express.js** - Web framework
-- **MongoDB** - Database
-- **Jest** - Testing framework
 
 ## 🌐 Internationalization
 
@@ -152,14 +167,52 @@ npm test
 ## 📦 Building for Production
 
 ```bash
-# Build frontend
+# Build both frontend and backend
+npm run build
+
+# Build frontend only
 cd packages/frontend
 npm run build
 
-# Build backend
+# Build backend only (currently minimal)
 cd packages/backend
 npm run build
 ```
+
+## 🚀 Deployment
+
+### Firebase Deployment
+
+From the root directory:
+
+```bash
+# Deploy everything (hosting + firestore + storage)
+npm run deploy
+
+# Deploy only frontend hosting
+npm run deploy:hosting
+
+# Deploy only Firestore rules
+npm run deploy:firestore
+```
+
+### Prerequisites
+
+1. Install Firebase CLI:
+```bash
+npm install -g firebase-tools
+firebase login
+```
+
+2. Initialize Firebase (already configured in `packages/backend/`):
+```bash
+cd packages/backend
+firebase use --add  # Select your Firebase project
+```
+
+### Production Build Output
+- Frontend: `packages/frontend/dist/` (deployed to Firebase Hosting)
+- Backend: Firebase configuration in `packages/backend/`
 
 ## 🤝 Contributing
 

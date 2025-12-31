@@ -1,7 +1,13 @@
 {
+  "firestore": {
+    "rules": "firestore.rules"
+  },
+  "storage": {
+    "rules": "storage.rules"
+  },
   "hosting": {
     "site": "edupath-5e9ff",
-    "public": "packages/frontend/dist",
+    "public": "../frontend/dist",
     "ignore": [
       "firebase.json",
       "**/.*",

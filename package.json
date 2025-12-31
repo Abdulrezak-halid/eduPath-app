@@ -13,6 +13,9 @@
     "build:back": "cd packages/backend && npm run build",
     "build:front": "cd packages/frontend && npm run build",
     "build": "npm run build:back && npm run build:front",
+    "deploy": "npm run build:front && cd packages/backend && firebase deploy",
+    "deploy:hosting": "npm run build:front && cd packages/backend && firebase deploy --only hosting",
+    "deploy:firestore": "cd packages/backend && firebase deploy --only firestore",
     "clean": "rm -rf node_modules packages/backend/node_modules packages/frontend/node_modules",
     "clean:install": "npm run clean && npm run install:all"
   },
