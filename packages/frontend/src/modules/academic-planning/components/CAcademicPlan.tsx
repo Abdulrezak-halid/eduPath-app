@@ -58,28 +58,28 @@ export const CAcademicPlan = () => {
   };
 
   const weeklySchedule: IAcademicItem[] = [
-    { activity: 'Classes & Lectures', hours: 15, percentage: 25, color: '#1976d2' },
-    { activity: 'Self Study & Reading', hours: 20, percentage: 33, color: '#2e7d32' },
-    { activity: 'Assignments & Projects', hours: 10, percentage: 17, color: '#ed6c02' },
-    { activity: 'Group Study', hours: 5, percentage: 8, color: '#9c27b0' },
-    { activity: 'Review & Practice', hours: 8, percentage: 13, color: '#d32f2f' },
-    { activity: 'Rest & Breaks', hours: 2, percentage: 4, color: '#0288d1' },
+    { activity: t('academicPlanActivityClasses'), hours: 15, percentage: 25, color: '#1976d2' },
+    { activity: t('academicPlanActivitySelfStudy'), hours: 20, percentage: 33, color: '#2e7d32' },
+    { activity: t('academicPlanActivityAssignments'), hours: 10, percentage: 17, color: '#ed6c02' },
+    { activity: t('academicPlanActivityGroupStudy'), hours: 5, percentage: 8, color: '#9c27b0' },
+    { activity: t('academicPlanActivityReview'), hours: 8, percentage: 13, color: '#d32f2f' },
+    { activity: t('academicPlanActivityRest'), hours: 2, percentage: 4, color: '#0288d1' },
   ];
 
   const semesterPlan: IAcademicItem[] = [
-    { activity: 'Core Courses (3-4)', hours: 180, percentage: 45, color: '#1976d2' },
-    { activity: 'Elective Courses (1-2)', hours: 90, percentage: 22, color: '#2e7d32' },
-    { activity: 'Lab & Practical Work', hours: 60, percentage: 15, color: '#9c27b0' },
-    { activity: 'Projects & Research', hours: 50, percentage: 12, color: '#ed6c02' },
-    { activity: 'Exam Preparation', hours: 20, percentage: 6, color: '#0288d1' },
+    { activity: t('academicPlanActivityCoreCourses'), hours: 180, percentage: 45, color: '#1976d2' },
+    { activity: t('academicPlanActivityElectives'), hours: 90, percentage: 22, color: '#2e7d32' },
+    { activity: t('academicPlanActivityLab'), hours: 60, percentage: 15, color: '#9c27b0' },
+    { activity: t('academicPlanActivityProjects'), hours: 50, percentage: 12, color: '#ed6c02' },
+    { activity: t('academicPlanActivityExamPrep'), hours: 20, percentage: 6, color: '#0288d1' },
   ];
 
   const yearlyPlan: IAcademicItem[] = [
-    { activity: 'Fall Semester Courses', hours: 400, percentage: 40, color: '#1976d2' },
-    { activity: 'Spring Semester Courses', hours: 400, percentage: 40, color: '#2e7d32' },
-    { activity: 'Summer Learning', hours: 100, percentage: 10, color: '#ed6c02' },
-    { activity: 'Internship/Research', hours: 60, percentage: 6, color: '#9c27b0' },
-    { activity: 'Skill Development', hours: 40, percentage: 4, color: '#0288d1' },
+    { activity: t('academicPlanActivityFallSemester'), hours: 400, percentage: 40, color: '#1976d2' },
+    { activity: t('academicPlanActivitySpringSemester'), hours: 400, percentage: 40, color: '#2e7d32' },
+    { activity: t('academicPlanActivitySummerLearning'), hours: 100, percentage: 10, color: '#ed6c02' },
+    { activity: t('academicPlanActivityInternship'), hours: 60, percentage: 6, color: '#9c27b0' },
+    { activity: t('academicPlanActivitySkillDev'), hours: 40, percentage: 4, color: '#0288d1' },
   ];
 
   const totalWeekly = weeklySchedule.reduce((sum, item) => sum + item.hours, 0);
@@ -89,14 +89,14 @@ export const CAcademicPlan = () => {
   const renderScheduleTable = (schedule: IAcademicItem[], total: number, unit: string) => (
     <>
       <Alert severity="info" sx={{ mb: 2 }}>
-        These are recommended time allocations. Adjust based on your course load and learning pace.
+        {t('academicPlanAlertCustomize')}
       </Alert>
       
       <TableContainer component={Paper} variant="outlined">
         <Table>
           <TableHead>
             <TableRow sx={{ bgcolor: 'primary.main' }}>
-              <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>Activity</TableCell>
+              <TableCell sx={{ color: 'white', fontWeight: 'bold' }}>{t('academicPlanActivityClasses').split(' &')[0]}</TableCell>
               <TableCell align="right" sx={{ color: 'white', fontWeight: 'bold' }}>{unit}</TableCell>
               <TableCell align="right" sx={{ color: 'white', fontWeight: 'bold' }}>Percentage</TableCell>
               <TableCell align="right" sx={{ color: 'white', fontWeight: 'bold' }}>Distribution</TableCell>
@@ -149,7 +149,7 @@ export const CAcademicPlan = () => {
             <TableRow sx={{ bgcolor: 'grey.100' }}>
               <TableCell>
                 <Typography variant="subtitle1" fontWeight="bold">
-                  Total
+                  {t('academicPlanTotal')}
                 </Typography>
               </TableCell>
               <TableCell align="right">
@@ -178,27 +178,27 @@ export const CAcademicPlan = () => {
         </Typography>
         
         <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
-          Recommended time allocation templates for effective academic planning
+          {t('academicPlanningDescription')}
         </Typography>
         
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs value={value} onChange={handleChange} variant="fullWidth">
-            <Tab label="Weekly Schedule" />
-            <Tab label="Semester Plan" />
-            <Tab label="Yearly Plan" />
+            <Tab label={t('academicPlanWeeklySchedule')} />
+            <Tab label={t('academicPlanSemesterPlan')} />
+            <Tab label={t('academicPlanYearlyPlan')} />
           </Tabs>
         </Box>
         
         <TabPanel value={value} index={0}>
-          {renderScheduleTable(weeklySchedule, totalWeekly, 'Hours/Week')}
+          {renderScheduleTable(weeklySchedule, totalWeekly, t('academicPlanUnitHoursWeek'))}
         </TabPanel>
         
         <TabPanel value={value} index={1}>
-          {renderScheduleTable(semesterPlan, totalSemester, 'Total Hours')}
+          {renderScheduleTable(semesterPlan, totalSemester, t('academicPlanUnitTotalHours'))}
         </TabPanel>
         
         <TabPanel value={value} index={2}>
-          {renderScheduleTable(yearlyPlan, totalYearly, 'Total Hours')}
+          {renderScheduleTable(yearlyPlan, totalYearly, t('academicPlanUnitTotalHours'))}
         </TabPanel>
       </CardContent>
     </Card>

@@ -10,6 +10,7 @@ import {
   Chip,
   Divider
 } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined';
 import ListAltOutlinedIcon from '@mui/icons-material/ListAltOutlined';
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
@@ -20,53 +21,55 @@ import WorkspacePremiumOutlinedIcon from '@mui/icons-material/WorkspacePremiumOu
 import TipsAndUpdatesOutlinedIcon from '@mui/icons-material/TipsAndUpdatesOutlined';
 
 export const CAcademicTips = () => {
+  const { t } = useTranslation();
+
   const tips = [
     {
       icon: <ListAltOutlinedIcon color="primary" />,
-      title: 'Course Selection Strategy',
-      description: 'Research prerequisites early and balance course difficulty each semester',
+      title: t('academicTipCourseSelection'),
+      description: t('academicTipCourseSelectionDesc'),
       priority: 'high',
     },
     {
       icon: <CalendarMonthOutlinedIcon color="success" />,
-      title: 'Time Management',
-      description: 'Use time-blocking for study sessions and maintain a consistent schedule',
+      title: t('academicTipTimeManagement'),
+      description: t('academicTipTimeManagementDesc'),
       priority: 'high',
     },
     {
       icon: <AutoStoriesOutlinedIcon color="info" />,
-      title: 'Active Learning',
-      description: 'Take notes by hand, summarize in your own words, and teach concepts to others',
+      title: t('academicTipActiveLearning'),
+      description: t('academicTipActiveLearningDesc'),
       priority: 'high',
     },
     {
       icon: <GroupsOutlinedIcon color="secondary" />,
-      title: 'Study Groups',
-      description: 'Form small study groups (3-5 people) to discuss and review material together',
+      title: t('academicTipStudyGroups'),
+      description: t('academicTipStudyGroupsDesc'),
       priority: 'medium',
     },
     {
       icon: <AssessmentOutlinedIcon color="warning" />,
-      title: 'Regular Assessment',
-      description: 'Take practice tests weekly to identify weak areas and track progress',
+      title: t('academicTipRegularAssessment'),
+      description: t('academicTipRegularAssessmentDesc'),
       priority: 'medium',
     },
     {
       icon: <SchoolOutlinedIcon color="error" />,
-      title: 'Office Hours',
-      description: 'Visit professors during office hours - it improves understanding and relationships',
+      title: t('academicTipOfficeHours'),
+      description: t('academicTipOfficeHoursDesc'),
       priority: 'high',
     },
     {
       icon: <WorkspacePremiumOutlinedIcon color="primary" />,
-      title: 'GPA Management',
-      description: 'Balance challenging courses with easier ones to maintain a strong GPA',
+      title: t('academicTipGpaManagement'),
+      description: t('academicTipGpaManagementDesc'),
       priority: 'medium',
     },
     {
       icon: <TipsAndUpdatesOutlinedIcon color="info" />,
-      title: 'Peak Performance',
-      description: 'Schedule difficult subjects during your peak concentration hours',
+      title: t('academicTipPeakPerformance'),
+      description: t('academicTipPeakPerformanceDesc'),
       priority: 'low',
     },
   ];
@@ -86,12 +89,12 @@ export const CAcademicTips = () => {
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
           <TipsAndUpdatesOutlinedIcon color="primary" sx={{ fontSize: 28 }} />
           <Typography variant="h5" fontWeight="bold">
-            Academic Success Tips
+            {t('academicTipsTitle')}
           </Typography>
         </Box>
         
         <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
-          Essential strategies to excel in your academic journey
+          {t('academicTipsSubtitle')}
         </Typography>
         
         <Divider sx={{ mb: 2 }} />
@@ -120,7 +123,7 @@ export const CAcademicTips = () => {
                   }
                 />
                 <Chip 
-                  label={tip.priority.toUpperCase()} 
+                  label={t(`priority${tip.priority.charAt(0).toUpperCase() + tip.priority.slice(1)}`)} 
                   size="small" 
                   color={getPriorityColor(tip.priority) as any}
                   sx={{ ml: 1 }}

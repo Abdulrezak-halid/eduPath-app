@@ -28,12 +28,10 @@ const App = (): JSX.Element => {
       <AuthProvider>
         <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
           <Routes>
-            {/* Auth routes without layout */}
             <Route path="/login" element={<CLogin />} />
             <Route path="/signup" element={<CSignup />} />
             <Route path="/forgot-password" element={<CForgotPassword />} />
 
-            {/* Main routes with layout */}
             <Route element={<CMainLayout />}>
               <Route path="/" element={<CHomePage />} />
               <Route
