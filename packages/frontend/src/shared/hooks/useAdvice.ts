@@ -44,9 +44,7 @@ export const useAdvice = (filters: IAdviceFilters = {}): IUseAdviceResult => {
 
     try {
       const adviceCollection = collection(db, 'advice');
-      const constraints: QueryConstraint[] = [
-        where('status', '==', 'published'),
-      ];
+      const constraints: QueryConstraint[] = [];
 
       // Apply filters
       if (filters.major) {
@@ -61,8 +59,7 @@ export const useAdvice = (filters: IAdviceFilters = {}): IUseAdviceResult => {
         constraints.push(where('tags', 'array-contains-any', filters.tags));
       }
 
-      // Add ordering and limit
-      constraints.push(orderBy('upvotes', 'desc'));
+      // Simple ordering - no composite index needed
       constraints.push(orderBy('createdAt', 'desc'));
       constraints.push(limit(50));
 
@@ -73,6 +70,12 @@ export const useAdvice = (filters: IAdviceFilters = {}): IUseAdviceResult => {
         id: doc.id,
         ...doc.data(),
       })) as Advice[];
+      
+      // Filter inactive advice on client side
+      adviceData = adviceData.filter(a => a.status === 'active');
+      
+      // Sort by upvotes on client side
+      adviceData.sort((a, b) => (b.upvotes || 0) - (a.upvotes || 0));
 
       // Client-side search filtering
       if (filters.searchQuery && filters.searchQuery.trim()) {

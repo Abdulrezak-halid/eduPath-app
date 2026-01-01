@@ -44,9 +44,7 @@ export const useQuestions = (
       setLoading(true);
       setError(null);
 
-      const constraints: QueryConstraint[] = [
-        where('status', '==', 'active'),
-      ];
+      const constraints: QueryConstraint[] = [];
 
       // Add major filter
       if (filters.major) {
@@ -63,7 +61,7 @@ export const useQuestions = (
         constraints.push(where('tags', 'array-contains', filters.tags[0]));
       }
 
-      // Add ordering and limit
+      // Simple ordering - no composite index needed
       constraints.push(orderBy('createdAt', 'desc'));
       constraints.push(limit(limitCount));
 
@@ -74,6 +72,9 @@ export const useQuestions = (
         id: doc.id,
         ...doc.data(),
       } as Question));
+      
+      // Filter out inactive questions on client side
+      fetchedQuestions = fetchedQuestions.filter(q => q.status === 'active');
 
       // Client-side search filtering if search query exists
       if (filters.searchQuery && filters.searchQuery.trim()) {
