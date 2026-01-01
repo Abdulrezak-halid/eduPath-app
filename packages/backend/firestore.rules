@@ -129,15 +129,14 @@ service cloud.firestore {
     // ============================================================================
     
     match /questions/{questionId} {
-      // Anyone can read active questions
-      allow read: if isActiveContent();
+      // Anyone can read questions
+      allow read: if true;
       
       // Authenticated users can create questions
       allow create: if isAuthenticated() &&
                        request.resource.data.authorId == request.auth.uid &&
                        isValidLength(request.resource.data.title, 10, 200) &&
                        isValidLength(request.resource.data.content, 20, 10000) &&
-                       request.resource.data.tags.size() >= 1 &&
                        request.resource.data.tags.size() <= 5 &&
                        request.resource.data.status == 'active';
       
@@ -180,15 +179,14 @@ service cloud.firestore {
     // ============================================================================
     
     match /advice/{adviceId} {
-      // Anyone can read active advice
-      allow read: if isActiveContent();
+      // Anyone can read advice
+      allow read: if true;
       
       // Authenticated users can create advice
       allow create: if isAuthenticated() &&
                        request.resource.data.authorId == request.auth.uid &&
                        isValidLength(request.resource.data.title, 10, 200) &&
                        isValidLength(request.resource.data.content, 20, 10000) &&
-                       request.resource.data.tags.size() >= 1 &&
                        request.resource.data.tags.size() <= 5 &&
                        request.resource.data.status == 'active';
       

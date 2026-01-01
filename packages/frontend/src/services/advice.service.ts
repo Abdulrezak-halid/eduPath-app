@@ -40,7 +40,7 @@ export const adviceService = {
       ...formData,
       authorId: currentUser.uid,
       authorName: currentUser.displayName || 'Anonymous',
-      authorPhotoURL: currentUser.photoURL || undefined,
+      ...(currentUser.photoURL && { authorPhotoURL: currentUser.photoURL }),
     };
 
     // Validate input
@@ -60,6 +60,13 @@ export const adviceService = {
       createdAt: Timestamp.now(),
       updatedAt: Timestamp.now(),
     };
+    
+    // Remove undefined fields
+    Object.keys(adviceData).forEach(key => {
+      if (adviceData[key as keyof typeof adviceData] === undefined) {
+        delete adviceData[key as keyof typeof adviceData];
+      }
+    });
 
     const docRef = await addDoc(adviceCollection, adviceData);
     return docRef.id;

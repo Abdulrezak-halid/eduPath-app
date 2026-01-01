@@ -7,6 +7,7 @@
 import { FC, useState, useCallback, ChangeEvent } from 'react';
 import { Box, Alert } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { Link as RouterLink } from 'react-router-dom';
 import { questionsService } from '../../../services/questions.service';
 import { MajorField } from '../../../models/firestore.models';
 import { IQuestionFormData } from '../../../models/component-inputs';
@@ -18,6 +19,7 @@ import {
   CSelect,
   CChipInput,
 } from '@/base/components';
+import { useAuth } from '@/shared/contexts/AuthContext';
 
 interface ICAskQuestionDialogProps {
   open: boolean;
@@ -31,6 +33,7 @@ export const CAskQuestionDialog: FC<ICAskQuestionDialogProps> = ({
   onSuccess,
 }) => {
   const { t } = useTranslation();
+  const { currentUser } = useAuth();
 
   const MAJOR_OPTIONS: ICSelectOption[] = [
     { value: 'computer-science', label: t('majorsComputerScience') },
@@ -133,13 +136,22 @@ export const CAskQuestionDialog: FC<ICAskQuestionDialogProps> = ({
           <CButton onClick={handleCancel} disabled={loading}>
             {t('questionsCancel')}
           </CButton>
-          <CButton onClick={handleSubmit} loading={loading}>
+          <CButton onClick={handleSubmit} loading={loading} disabled={!currentUser}>
             {t('questionsPostQuestion')}
           </CButton>
         </>
       }
     >
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+        {!currentUser && (
+          <Alert severity="warning">
+            {t('authPleaseSignIn')}{' '}
+            <RouterLink to="/login" style={{ color: 'inherit', fontWeight: 'bold' }}>
+              {t('authSignIn')}
+            </RouterLink>
+          </Alert>
+        )}
+
         {submitError && (
           <Alert severity="error" onClose={() => setSubmitError(null)}>
             {submitError}

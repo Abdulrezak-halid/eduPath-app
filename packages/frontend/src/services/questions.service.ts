@@ -40,7 +40,7 @@ export const questionsService = {
       ...formData,
       authorId: currentUser.uid,
       authorName: currentUser.displayName || 'Anonymous',
-      authorPhotoURL: currentUser.photoURL || undefined,
+      ...(currentUser.photoURL && { authorPhotoURL: currentUser.photoURL }),
     };
 
     // Validate input
@@ -56,12 +56,18 @@ export const questionsService = {
       downvotes: 0,
       answerCount: 0,
       hasAcceptedAnswer: false,
-      acceptedAnswerId: undefined,
       status: 'active',
       createdAt: Timestamp.now(),
       updatedAt: Timestamp.now(),
       lastActivityAt: Timestamp.now(),
     };
+    
+    // Remove undefined fields
+    Object.keys(questionData).forEach(key => {
+      if (questionData[key as keyof typeof questionData] === undefined) {
+        delete questionData[key as keyof typeof questionData];
+      }
+    });
 
     const docRef = await addDoc(questionsCollection, questionData);
     return docRef.id;

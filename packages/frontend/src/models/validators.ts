@@ -37,7 +37,7 @@ export const MAX_TITLE_LENGTH = 200;
 export const MIN_CONTENT_LENGTH = 20;
 export const MAX_CONTENT_LENGTH = 10000;
 export const MAX_TAGS = 5;
-export const MIN_TAGS = 1;
+export const MIN_TAGS = 0;
 
 // ============================================================================
 // Validation Functions
@@ -89,8 +89,13 @@ export const isValidContent = (content: string): boolean => {
  * Validate tags array
  */
 export const isValidTags = (tags: string[]): boolean => {
-  if (tags.length < MIN_TAGS || tags.length > MAX_TAGS) {
+  if (tags.length > MAX_TAGS) {
     return false;
+  }
+  
+  // Empty tags array is allowed
+  if (tags.length === 0) {
+    return true;
   }
   
   // Check each tag is valid
@@ -178,7 +183,7 @@ export const validateCreateQuestion = (input: CreateQuestionInput): string[] => 
   }
 
   if (!isValidTags(input.tags)) {
-    errors.push(`Must have ${MIN_TAGS}-${MAX_TAGS} valid tags`);
+    errors.push(`Tags must be valid (max ${MAX_TAGS} tags, each 2-30 characters, lowercase letters/numbers/hyphens only)`);
   }
 
   if (!input.authorId || input.authorId.trim().length === 0) {

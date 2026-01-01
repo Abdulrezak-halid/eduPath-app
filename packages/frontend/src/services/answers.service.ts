@@ -46,7 +46,7 @@ export const answersService = {
       questionId,
       authorId: currentUser.uid,
       authorName: currentUser.displayName || 'Anonymous',
-      authorPhotoURL: currentUser.photoURL || undefined,
+      ...(currentUser.photoURL && { authorPhotoURL: currentUser.photoURL }),
     };
 
     // Validate input
@@ -65,6 +65,13 @@ export const answersService = {
       createdAt: Timestamp.now(),
       updatedAt: Timestamp.now(),
     };
+    
+    // Remove undefined fields
+    Object.keys(answerData).forEach(key => {
+      if (answerData[key as keyof typeof answerData] === undefined) {
+        delete answerData[key as keyof typeof answerData];
+      }
+    });
 
     const answersCollection = collection(
       db,

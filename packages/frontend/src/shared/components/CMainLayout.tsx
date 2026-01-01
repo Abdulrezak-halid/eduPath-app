@@ -8,18 +8,19 @@ import {
   MenuItem,
   useTheme,
   useMediaQuery,
+  Button,
+  Typography,
 } from '@mui/material';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import TranslateOutlinedIcon from '@mui/icons-material/TranslateOutlined';
-import { Link as RouterLink } from 'react-router-dom';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import { Link as RouterLink, Outlet, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import styled from '@emotion/styled';
-
-interface ICMainLayoutProps {
-  children: React.ReactNode;
-}
+import { useAuth } from '@/shared/contexts/AuthContext';
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
   background: theme.palette.background.paper,
@@ -27,12 +28,14 @@ const StyledAppBar = styled(AppBar)(({ theme }) => ({
   borderBottom: `1px solid ${theme.palette.divider}`,
 }));
 
-export const CMainLayout = ({ children }: ICMainLayoutProps): JSX.Element => {
+export const CMainLayout = (): JSX.Element => {
   const { t, i18n } = useTranslation();
   const theme = useTheme();
+  const navigate = useNavigate();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [langAnchorEl, setLangAnchorEl] = useState<null | HTMLElement>(null);
+  const { currentUser, logout } = useAuth();
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>): void => {
     setAnchorEl(event.currentTarget);
@@ -53,6 +56,15 @@ export const CMainLayout = ({ children }: ICMainLayoutProps): JSX.Element => {
   const changeLanguage = (lang: string): void => {
     i18n.changeLanguage(lang);
     handleLangClose();
+  };
+
+  const handleLogout = async (): Promise<void> => {
+    try {
+      await logout();
+      navigate('/');
+    } catch (error) {
+      console.error('Failed to log out:', error);
+    }
   };
 
   return (
@@ -106,7 +118,7 @@ export const CMainLayout = ({ children }: ICMainLayoutProps): JSX.Element => {
                 </IconButton>
               ) : (
                 <>
-                  <Box sx={{ display: 'flex', gap: 2 }}>
+                  <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
                     <MenuItem
                       component={RouterLink}
                       to="/advice"
@@ -128,6 +140,37 @@ export const CMainLayout = ({ children }: ICMainLayoutProps): JSX.Element => {
                     >
                       {t('navigationAbout')}
                     </MenuItem>
+                    
+                    {currentUser ? (
+                      <>
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, ml: 2 }}>
+                          <AccountCircleOutlinedIcon color="primary" />
+                          <Typography variant="body2" color="primary">
+                            {currentUser.displayName || currentUser.email}
+                          </Typography>
+                          <IconButton
+                            size="small"
+                            color="primary"
+                            onClick={handleLogout}
+                            title={t('authSignOut')}
+                          >
+                            <LogoutOutlinedIcon />
+                          </IconButton>
+                        </Box>
+                      </>
+                    ) : (
+                      <Button
+                        component={RouterLink}
+                        to="/login"
+                        variant="outlined"
+                        color="primary"
+                        size="small"
+                        sx={{ ml: 2 }}
+                      >
+                        {t('authSignIn')}
+                      </Button>
+                    )}
+
                     <IconButton
                       size="large"
                       color="primary"
@@ -143,46 +186,61 @@ export const CMainLayout = ({ children }: ICMainLayoutProps): JSX.Element => {
         </Container>
       </StyledAppBar>
 
-      <AnimatePresence>
-        <Menu
-          id="menu-appbar"
-          anchorEl={anchorEl}
-          open={Boolean(anchorEl)}
-          onClose={handleClose}
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
+      <Menu
+        id="menu-appbar"
+        anchorEl={anchorEl}
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+      >
+        <MenuItem component={RouterLink} to="/advice" onClick={handleClose}>
+          {t('navigation.advice')}
+        </MenuItem>
+        <MenuItem
+          component={RouterLink}
+          to="/questions"
+          onClick={handleClose}
         >
-          <MenuItem component={RouterLink} to="/advice" onClick={handleClose}>
-            {t('navigation.advice')}
+          {t('navigationQuestions')}
+        </MenuItem>
+        <MenuItem component={RouterLink} to="/about" onClick={handleClose}>
+          {t('navigationAbout')}
+        </MenuItem>
+        
+        {currentUser ? (
+          <React.Fragment key="auth-user-menu">
+            <MenuItem disabled>
+              <Typography variant="body2" color="text.secondary">
+                {currentUser.displayName || currentUser.email}
+              </Typography>
+            </MenuItem>
+            <MenuItem onClick={handleLogout}>
+              {t('authSignOut')}
+            </MenuItem>
+          </React.Fragment>
+        ) : (
+          <MenuItem key="login-menu" component={RouterLink} to="/login" onClick={handleClose}>
+            {t('authSignIn')}
           </MenuItem>
-          <MenuItem
-            component={RouterLink}
-            to="/questions"
-            onClick={handleClose}
-          >
-            {t('navigationQuestions')}
-          </MenuItem>
-          <MenuItem component={RouterLink} to="/about" onClick={handleClose}>
-            {t('navigationAbout')}
-          </MenuItem>
-        </Menu>
+        )}
+      </Menu>
 
-        <Menu
-          id="language-menu"
-          anchorEl={langAnchorEl}
-          open={Boolean(langAnchorEl)}
-          onClose={handleLangClose}
-        >
-          <MenuItem onClick={() => changeLanguage('en')}>English</MenuItem>
-          <MenuItem onClick={() => changeLanguage('tr')}>Türkçe</MenuItem>
-        </Menu>
-      </AnimatePresence>
+      <Menu
+        id="language-menu"
+        anchorEl={langAnchorEl}
+        open={Boolean(langAnchorEl)}
+        onClose={handleLangClose}
+      >
+        <MenuItem onClick={() => changeLanguage('en')}>English</MenuItem>
+        <MenuItem onClick={() => changeLanguage('tr')}>Türkçe</MenuItem>
+      </Menu>
 
       <Box component="main" sx={{ flexGrow: 1 }}>
         <motion.div
@@ -190,7 +248,7 @@ export const CMainLayout = ({ children }: ICMainLayoutProps): JSX.Element => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          {children}
+          <Outlet />
         </motion.div>
       </Box>
     </Box>
