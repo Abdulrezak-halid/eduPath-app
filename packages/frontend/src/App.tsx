@@ -5,6 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { CMainLayout } from '@/shared/components/CMainLayout';
 import { CHomePage } from '@/modules/home/pages/CHomePage';
 import { CAcademicPlanningModule } from '@/modules/academic-planning/pages/CAcademicPlanningModule';
+import { AuthProvider } from '@/shared/contexts/AuthContext';
 
 import './i18n';
 import { theme } from './theme';
@@ -16,42 +17,53 @@ import { CStudySkillsModule } from './modules/study-skills/pages/CStudySkillsMod
 import { CUniversityLifeModule } from './modules/university-life/pages/CUniversityLifeModule';
 import CQuestionsListPage from './modules/questions/pages/CQuestionsListPage';
 import { CAboutPage } from './modules/about/pages/CAboutPage';
+import { CLogin } from './modules/auth/pages/CLogin';
+import { CSignup } from './modules/auth/pages/CSignup';
+import { CForgotPassword } from './modules/auth/pages/CForgotPassword';
 
 const App = (): JSX.Element => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Router>
-        <CMainLayout>
+      <AuthProvider>
+        <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
           <Routes>
-            <Route path="/" element={<CHomePage />} />
-            <Route
-              path="/academic-planning"
-              element={<CAcademicPlanningModule />}
-            />
-            <Route
-              path="/career-guidance"
-              element={<CCareerGuidanceModule />}
-            />
-            <Route
-              path="/university-life"
-              element={<CUniversityLifeModule />}
-            />
-            <Route path="/study-skills" element={<CStudySkillsModule />} />
-            <Route
-              path="/personal-development"
-              element={<CPersonalDevelopmentModule />}
-            />
-            <Route
-              path="/financial-planning"
-              element={<CFinancialPlanningModule />}
-            />
-            <Route path="/advice" element={<CAdviceListPage />} />
-            <Route path="/questions" element={<CQuestionsListPage />} />
-            <Route path="/about" element={<CAboutPage />} />
+            {/* Auth routes without layout */}
+            <Route path="/login" element={<CLogin />} />
+            <Route path="/signup" element={<CSignup />} />
+            <Route path="/forgot-password" element={<CForgotPassword />} />
+
+            {/* Main routes with layout */}
+            <Route element={<CMainLayout />}>
+              <Route path="/" element={<CHomePage />} />
+              <Route
+                path="/academic-planning"
+                element={<CAcademicPlanningModule />}
+              />
+              <Route
+                path="/career-guidance"
+                element={<CCareerGuidanceModule />}
+              />
+              <Route
+                path="/university-life"
+                element={<CUniversityLifeModule />}
+              />
+              <Route path="/study-skills" element={<CStudySkillsModule />} />
+              <Route
+                path="/personal-development"
+                element={<CPersonalDevelopmentModule />}
+              />
+              <Route
+                path="/financial-planning"
+                element={<CFinancialPlanningModule />}
+              />
+              <Route path="/advice" element={<CAdviceListPage />} />
+              <Route path="/questions" element={<CQuestionsListPage />} />
+              <Route path="/about" element={<CAboutPage />} />
+            </Route>
           </Routes>
-        </CMainLayout>
-      </Router>
+        </Router>
+      </AuthProvider>
     </ThemeProvider>
   );
 };
