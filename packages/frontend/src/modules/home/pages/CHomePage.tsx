@@ -26,7 +26,6 @@ export const CHomePage = (): JSX.Element => {
 
   return (
     <Box>
-      {/* Hero Section */}
       <Box
         sx={{
           bgcolor: 'primary.main',
@@ -37,10 +36,10 @@ export const CHomePage = (): JSX.Element => {
         }}
       >
         <Container maxWidth="md">
-          <Typography variant="h2" component="h1" gutterBottom>
+          <Typography variant="h2" component="h1" color={'Menu'} gutterBottom>
             {t('homeHeroTitle')}
           </Typography>
-          <Typography variant="h5" paragraph>
+          <Typography variant="h5" color="text.secondary" paragraph>
             {t('homeHeroSubtitle')}
           </Typography>
           <Box sx={{ mt: 4 }}>
@@ -66,7 +65,6 @@ export const CHomePage = (): JSX.Element => {
         </Container>
       </Box>
 
-      {/* About Us Section */}
       <Box sx={{ bgcolor: 'grey.50', py: 8, mt: 6 }}>
         <Container maxWidth="lg">
           <Typography variant="h3" component="h2" align="center" gutterBottom>
@@ -158,7 +156,6 @@ export const CHomePage = (): JSX.Element => {
         </Container>
       </Box>
 
-      {/* Modules Section */}
       <Container maxWidth="lg">
         <Typography variant="h3" component="h2" align="center" gutterBottom>
           {t('homeModulesTitle')}
@@ -181,7 +178,6 @@ export const CHomePage = (): JSX.Element => {
         </Grid>
       </Container>
 
-      {/* Footer */}
       <Box
         component="footer"
         sx={{

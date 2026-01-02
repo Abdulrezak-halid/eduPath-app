@@ -18,7 +18,7 @@ import TranslateOutlinedIcon from '@mui/icons-material/TranslateOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import { Link as RouterLink, Outlet, useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import styled from '@emotion/styled';
 import { useAuth } from '@/shared/contexts/AuthContext';
 
@@ -70,7 +70,7 @@ export const CMainLayout = (): JSX.Element => {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <StyledAppBar position="sticky" color="default">
-        <Container maxWidth="lg">
+        <Container maxWidth="xl">
           <Toolbar disableGutters>
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -140,10 +140,25 @@ export const CMainLayout = (): JSX.Element => {
                     >
                       {t('navigationAbout')}
                     </MenuItem>
-                    
+
+                    <IconButton
+                      size="large"
+                      color="primary"
+                      onClick={handleLangMenu}
+                    >
+                      <TranslateOutlinedIcon />
+                    </IconButton>
+
                     {currentUser ? (
                       <>
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, ml: 2 }}>
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 1,
+                            ml: 2,
+                          }}
+                        >
                           <AccountCircleOutlinedIcon color="primary" />
                           <Typography variant="body2" color="primary">
                             {currentUser.displayName || currentUser.email}
@@ -170,14 +185,6 @@ export const CMainLayout = (): JSX.Element => {
                         {t('authSignIn')}
                       </Button>
                     )}
-
-                    <IconButton
-                      size="large"
-                      color="primary"
-                      onClick={handleLangMenu}
-                    >
-                      <TranslateOutlinedIcon />
-                    </IconButton>
                   </Box>
                 </>
               )}
@@ -203,17 +210,13 @@ export const CMainLayout = (): JSX.Element => {
         <MenuItem component={RouterLink} to="/advice" onClick={handleClose}>
           {t('navigation.advice')}
         </MenuItem>
-        <MenuItem
-          component={RouterLink}
-          to="/questions"
-          onClick={handleClose}
-        >
+        <MenuItem component={RouterLink} to="/questions" onClick={handleClose}>
           {t('navigationQuestions')}
         </MenuItem>
         <MenuItem component={RouterLink} to="/about" onClick={handleClose}>
           {t('navigationAbout')}
         </MenuItem>
-        
+
         {currentUser ? (
           <React.Fragment key="auth-user-menu">
             <MenuItem disabled>
@@ -221,12 +224,15 @@ export const CMainLayout = (): JSX.Element => {
                 {currentUser.displayName || currentUser.email}
               </Typography>
             </MenuItem>
-            <MenuItem onClick={handleLogout}>
-              {t('authSignOut')}
-            </MenuItem>
+            <MenuItem onClick={handleLogout}>{t('authSignOut')}</MenuItem>
           </React.Fragment>
         ) : (
-          <MenuItem key="login-menu" component={RouterLink} to="/login" onClick={handleClose}>
+          <MenuItem
+            key="login-menu"
+            component={RouterLink}
+            to="/login"
+            onClick={handleClose}
+          >
             {t('authSignIn')}
           </MenuItem>
         )}
