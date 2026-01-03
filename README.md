@@ -242,13 +242,6 @@ Each educational module has a **unique visual identity**:
 - **Personal Development**: Stock market-style tracker + Gamification
 - **Financial Planning**: Budget templates with percentage breakdowns
 
-### UX Principles
-- 🎯 **Interactive**: Clickable cards, hover effects, animations
-- 📱 **Responsive**: Mobile-first design with breakpoints
-- ♿ **Accessible**: ARIA labels, keyboard navigation
-- 🌈 **Visual Feedback**: Color-coded categories, progress indicators
-- ⚡ **Performance**: Code splitting, lazy loading
-
 ## 🌐 Internationalization
 
 EduPath currently supports:
