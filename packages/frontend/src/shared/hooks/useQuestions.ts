@@ -1,6 +1,6 @@
 /**
  * useQuestions Hook
- * 
+ *
  * Custom hook for fetching and managing questions from Firestore
  */
 
@@ -12,10 +12,16 @@ import {
   orderBy,
   limit,
   getDocs,
+  getDoc,
+  doc,
+  updateDoc,
+  increment,
+  serverTimestamp,
   QueryConstraint,
 } from 'firebase/firestore';
 import { db } from '../../../firebase';
 import type { Question, MajorField } from '../../models';
+import { IAnswer } from '../interfaces/common';
 
 export interface IQuestionFilters {
   major?: MajorField;
@@ -68,13 +74,16 @@ export const useQuestions = (
       const q = query(collection(db, 'questions'), ...constraints);
       const querySnapshot = await getDocs(q);
 
-      let fetchedQuestions: Question[] = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      } as Question));
-      
+      let fetchedQuestions: Question[] = querySnapshot.docs.map(
+        (doc) =>
+          ({
+            id: doc.id,
+            ...doc.data(),
+          }) as Question
+      );
+
       // Filter out inactive questions on client side
-      fetchedQuestions = fetchedQuestions.filter(q => q.status === 'active');
+      fetchedQuestions = fetchedQuestions.filter((q) => q.status === 'active');
 
       // Client-side search filtering if search query exists
       if (filters.searchQuery && filters.searchQuery.trim()) {
@@ -90,7 +99,9 @@ export const useQuestions = (
       setQuestions(fetchedQuestions);
     } catch (err) {
       console.error('Error fetching questions:', err);
-      setError(err instanceof Error ? err.message : 'Failed to fetch questions');
+      setError(
+        err instanceof Error ? err.message : 'Failed to fetch questions'
+      );
     } finally {
       setLoading(false);
     }
@@ -98,7 +109,13 @@ export const useQuestions = (
 
   useEffect(() => {
     fetchQuestions();
-  }, [filters.major, filters.category, filters.tags?.join(','), filters.searchQuery, limitCount]);
+  }, [
+    filters.major,
+    filters.category,
+    filters.tags?.join(','),
+    filters.searchQuery,
+    limitCount,
+  ]);
 
   return {
     questions,
@@ -107,3 +124,47 @@ export const useQuestions = (
     refetch: fetchQuestions,
   };
 };
+
+/**
+ * Get single question by ID
+ */
+export const getQuestionById = async (
+  questionId: string
+): Promise<Question> => {
+  const questionDoc = await getDoc(doc(db, 'questions', questionId));
+
+  if (!questionDoc.exists()) {
+    throw new Error('Question not found');
+  }
+
+  // Increment views
+  await updateDoc(doc(db, 'questions', questionId), {
+    views: increment(1),
+  });
+
+  return {
+    id: questionDoc.id,
+    ...questionDoc.data(),
+  } as Question;
+};
+
+/**
+ * Add an answer to a question
+ */
+export const addAnswer = async (questionId: string, p0: { content: string; authorId: string; authorName: string; authorPhotoURL: string; }): Promise<void> => {
+  // In a real implementation, create an answer in the answers subcollection
+  // For now, just increment the answer count
+  const questionRef = doc(db, 'questions', questionId);
+
+  await updateDoc(questionRef, {
+    answerCount: increment(1),
+    updatedAt: serverTimestamp(),
+    lastActivityAt: serverTimestamp(),
+  });
+
+  // TODO: Implement actual answer creation in subcollection
+  // const answerRef = collection(db, 'questions', questionId, 'answers');
+  // await addDoc(answerRef, { ...answer, createdAt: serverTimestamp() });
+};
+
+export type { Question as IQuestion, IAnswer };

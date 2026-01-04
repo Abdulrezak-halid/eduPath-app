@@ -12,6 +12,10 @@ import {
   orderBy,
   limit,
   getDocs,
+  getDoc,
+  doc,
+  updateDoc,
+  increment,
   QueryConstraint,
 } from 'firebase/firestore';
 import { db } from '../../../firebase';
@@ -107,3 +111,40 @@ export const useAdvice = (filters: IAdviceFilters = {}): IUseAdviceResult => {
     refetch: fetchAdvice,
   };
 };
+
+/**
+ * Get single advice by ID
+ */
+export const getAdviceById = async (adviceId: string): Promise<Advice> => {
+  const adviceDoc = await getDoc(doc(db, 'advice', adviceId));
+  
+  if (!adviceDoc.exists()) {
+    throw new Error('Advice not found');
+  }
+
+  // Increment views
+  await updateDoc(doc(db, 'advice', adviceId), {
+    views: increment(1)
+  });
+
+  return {
+    id: adviceDoc.id,
+    ...adviceDoc.data(),
+  } as Advice;
+};
+
+/**
+ * Like/Unlike advice
+ */
+export const likeAdvice = async (adviceId: string, _userId: string): Promise<void> => {
+  const adviceRef = doc(db, 'advice', adviceId);
+  
+  // Simply increment upvotes
+  // In a real app, you'd track user likes in a separate collection or user document
+  await updateDoc(adviceRef, {
+    upvotes: increment(1)
+  });
+};
+
+export type { Advice as IAdvice };
+

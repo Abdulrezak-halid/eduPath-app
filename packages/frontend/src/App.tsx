@@ -12,10 +12,12 @@ import { theme } from './theme';
 import { CCareerGuidanceModule } from './modules/career-guidance/pages/CCareerGuidanceModule';
 import { CFinancialPlanningModule } from './modules/financial-planning/pages/CFinancialPlanningModule';
 import { CAdviceListPage } from './modules/advice/pages/CAdviceListPage';
+import { CAdviceDetailPage } from './modules/advice/pages/CAdviceDetailPage';
 import { CPersonalDevelopmentModule } from './modules/personal-development/pages/CPersonalDevelopmentModule';
 import { CStudySkillsModule } from './modules/study-skills/pages/CStudySkillsModule';
 import { CUniversityLifeModule } from './modules/university-life/pages/CUniversityLifeModule';
 import CQuestionsListPage from './modules/questions/pages/CQuestionsListPage';
+import { CQuestionDetailPage } from './modules/questions/pages/CQuestionDetailPage';
 import { CAboutPage } from './modules/about/pages/CAboutPage';
 import { CLogin } from './modules/auth/pages/CLogin';
 import { CSignup } from './modules/auth/pages/CSignup';
@@ -56,7 +58,9 @@ const App = (): JSX.Element => {
                 element={<CFinancialPlanningModule />}
               />
               <Route path="/advice" element={<CAdviceListPage />} />
+              <Route path="/advice/:id" element={<CAdviceDetailPage />} />
               <Route path="/questions" element={<CQuestionsListPage />} />
+              <Route path="/questions/:id" element={<CQuestionDetailPage />} />
               <Route path="/about" element={<CAboutPage />} />
             </Route>
           </Routes>
