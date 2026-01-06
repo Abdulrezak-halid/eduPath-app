@@ -125,7 +125,6 @@ npm run dev
 - **Vite** - Lightning-fast build tool and dev server
 - **Framer Motion** - Production-ready animation library
 - **React Hook Form** - Performant form validation
-- **Yup** - Schema validation
 
 ### Backend
 - **Firebase** - Backend as a Service (BaaS)
