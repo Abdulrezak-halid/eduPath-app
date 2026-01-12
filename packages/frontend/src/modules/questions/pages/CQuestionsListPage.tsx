@@ -1,9 +1,3 @@
-/**
- * CQuestionsListPage
- *
- * Displays all questions with search and filtering capabilities
- */
-
 import { useState, useMemo } from 'react';
 import {
   Container,
@@ -120,10 +114,8 @@ const CQuestionsListPage = () => {
       </CHeroSection>
 
       <Container maxWidth="lg" sx={{ py: 6 }}>
-        {/* Search and Filters */}
         <Box sx={{ mb: 4 }}>
           <Grid container spacing={2}>
-            {/* Search */}
             <Grid item xs={12} md={6}>
               <TextField
                 fullWidth
@@ -142,7 +134,6 @@ const CQuestionsListPage = () => {
               />
             </Grid>
 
-            {/* Major Filter */}
             <Grid item xs={12} sm={6} md={3}>
               <TextField
                 select
@@ -171,7 +162,6 @@ const CQuestionsListPage = () => {
               </TextField>
             </Grid>
 
-            {/* Category Filter */}
             <Grid item xs={12} sm={6} md={3}>
               <TextField
                 select
@@ -199,7 +189,6 @@ const CQuestionsListPage = () => {
             </Grid>
           </Grid>
 
-          {/* Active Filters */}
           {(selectedMajor || selectedCategory || searchQuery) && (
             <Stack direction="row" spacing={1} sx={{ mt: 2 }}>
               {searchQuery && (
@@ -231,21 +220,18 @@ const CQuestionsListPage = () => {
           )}
         </Box>
 
-        {/* Loading State */}
         {loading && (
           <Box display="flex" justifyContent="center" py={8}>
             <CircularProgress />
           </Box>
         )}
 
-        {/* Error State */}
         {error && (
           <Alert severity="error" sx={{ mb: 4 }}>
             {error}
           </Alert>
         )}
 
-        {/* Questions List */}
         {!loading && !error && (
           <>
             {questions.length === 0 ? (
@@ -286,12 +272,10 @@ const CQuestionsListPage = () => {
                               alignItems="flex-start"
                             >
                               <Box flex={1}>
-                                {/* Title */}
                                 <Typography variant="h6" gutterBottom>
                                   {question.title}
                                 </Typography>
 
-                                {/* Content Preview */}
                                 <Typography
                                   variant="body2"
                                   color="text.secondary"
@@ -307,7 +291,6 @@ const CQuestionsListPage = () => {
                                   {question.content}
                                 </Typography>
 
-                                {/* Tags */}
                                 <Stack
                                   direction="row"
                                   spacing={1}
@@ -324,7 +307,6 @@ const CQuestionsListPage = () => {
                                   ))}
                                 </Stack>
 
-                                {/* Meta Info */}
                                 <Box display="flex" alignItems="center" gap={2}>
                                   <Box
                                     display="flex"
@@ -380,7 +362,6 @@ const CQuestionsListPage = () => {
                                 </Box>
                               </Box>
 
-                              {/* Upvotes */}
                               <Box
                                 sx={{
                                   ml: 2,
@@ -410,7 +391,6 @@ const CQuestionsListPage = () => {
               </Grid>
             )}
 
-            {/* Results Count */}
             {questions.length > 0 && (
               <Box textAlign="center" mt={4}>
                 <Typography variant="body2" color="text.secondary">

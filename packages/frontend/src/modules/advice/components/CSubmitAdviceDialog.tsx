@@ -1,9 +1,3 @@
-/**
- * CSubmitAdviceDialog
- *
- * Modal dialog for submitting new advice
- */
-
 import { FC, useState, useCallback } from 'react';
 import { Box, Alert } from '@mui/material';
 import { useTranslation } from 'react-i18next';

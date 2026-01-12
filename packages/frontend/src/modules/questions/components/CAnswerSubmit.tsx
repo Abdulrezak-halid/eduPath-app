@@ -1,9 +1,3 @@
-/**
- * CAnswerSubmit
- *
- * Component for submitting an answer to a question
- */
-
 import { FC, useState, useCallback, ChangeEvent } from 'react';
 import { Box, Alert, Paper, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';

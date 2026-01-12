@@ -1,9 +1,3 @@
-/**
- * CForgotPassword
- * 
- * Password reset page
- */
-
 import { useState, FormEvent } from 'react';
 import {
   Container,

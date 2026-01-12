@@ -1,9 +1,3 @@
-/**
- * CSignup
- * 
- * User registration page with email/password
- */
-
 import { useState, FormEvent } from 'react';
 import {
   Container,

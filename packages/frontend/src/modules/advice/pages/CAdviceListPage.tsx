@@ -1,9 +1,3 @@
-/**
- * CAdviceListPage
- *
- * Page for displaying advice with filters and search
- */
-
 import { FC, useState, useCallback, ChangeEvent, KeyboardEvent } from 'react';
 import {
   Box,
@@ -127,7 +121,6 @@ export const CAdviceListPage: FC = () => {
       </CHeroSection>
 
       <Container maxWidth="lg" sx={{ py: 4 }}>
-        {/* Search and Filters */}
         <Card sx={{ mb: 4, p: 2 }}>
           <Grid container spacing={2} alignItems="center">
             <Grid item xs={12} md={4}>
@@ -211,7 +204,6 @@ export const CAdviceListPage: FC = () => {
           )}
         </Card>
 
-        {/* Results */}
         {loading ? (
           <CLoading message={t('adviceErrorLoading')} />
         ) : error ? (

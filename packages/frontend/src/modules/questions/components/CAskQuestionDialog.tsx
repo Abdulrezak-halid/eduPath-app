@@ -1,9 +1,3 @@
-/**
- * CAskQuestionDialog
- *
- * Modal dialog for creating a new question
- */
-
 import { FC, useState, useCallback, ChangeEvent } from 'react';
 import { Box, Alert } from '@mui/material';
 import { useTranslation } from 'react-i18next';

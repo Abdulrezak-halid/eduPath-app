@@ -1,9 +1,3 @@
-/**
- * CLogin
- * 
- * Login page component with email/password authentication
- */
-
 import { useState, FormEvent } from 'react';
 import {
   Container,

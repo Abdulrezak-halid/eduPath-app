@@ -1,9 +1,3 @@
-/**
- * CMarkBestAnswerButton
- *
- * Button for question authors to mark an answer as accepted
- */
-
 import { FC, useState, useCallback, memo } from 'react';
 import { Alert } from '@mui/material';
 import { useTranslation } from 'react-i18next';

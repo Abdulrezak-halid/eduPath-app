@@ -1,9 +1,3 @@
-/**
- * CVoteButtons
- *
- * Component for upvote/downvote buttons with vote count display
- */
-
 import { FC, memo } from 'react';
 import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';

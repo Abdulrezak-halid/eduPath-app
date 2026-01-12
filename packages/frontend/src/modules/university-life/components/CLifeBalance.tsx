@@ -126,7 +126,6 @@ export const CLifeBalance = () => {
         </Typography>
       </Box>
 
-      {/* Eisenhower Matrix */}
       <Card elevation={2} sx={{ mb: 3 }}>
         <CardContent>
           <Typography variant="h6" fontWeight="bold" gutterBottom>
