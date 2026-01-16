@@ -117,18 +117,6 @@ All UI text is fully translated including:
 
 To add a new language, create a translation file in `packages/frontend/src/locales/`.
 
-## 🧪 Testing
-
-```bash
-# Run frontend tests
-cd packages/frontend
-npm test
-
-# Run backend tests
-cd packages/backend
-npm test
-```
-
 ## 📦 Building for Production
 
 ```bash
