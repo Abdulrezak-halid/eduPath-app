@@ -86,23 +86,6 @@ npm run dev
 - **Node.js** - JavaScript runtime
 - **TypeScript** - Type-safe backend development
 
-## � Design Philosophy
-
-### Component Naming Convention
-- All components start with **'C'** prefix (e.g., `CButton`, `CModuleCard`)
-- Interfaces/Types start with **'I'** prefix (e.g., `ISkillStock`, `IChallenge`)
-- Arrow functions are used consistently
-- ESLint rules are strictly followed
-
-### Module-Specific Design
-Each educational module has a **unique visual identity**:
-- **Academic Planning**: Tables with progress bars and time allocations
-- **Study Skills**: Step-by-step Stepper components for methods
-- **Career Guidance**: Accordion-based expandable guides
-- **University Life**: Resource directory grid + Interactive priority matrix
-- **Personal Development**: Stock market-style tracker + Gamification
-- **Financial Planning**: Budget templates with percentage breakdowns
-
 ## 🌐 Internationalization
 
 EduPath currently supports:
