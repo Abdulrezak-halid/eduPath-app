@@ -63,28 +63,25 @@ npm run dev
 ## 🛠️ Technology Stack
 
 ### Frontend
-- **React 18** - UI library with concurrent features
-- **TypeScript 5** - Type safety and enhanced developer experience
-- **Material UI v5** - Component library with comprehensive design system
-  - Accordion, Stepper, Tabs, Cards, Progress bars
-  - Avatar, Chip, Paper, Stack components
-  - Responsive Grid and Layout system
-- **Emotion** - CSS-in-JS styling solution
-- **React Router v6** - Client-side routing and navigation
-- **React i18next** - Internationalization (590+ translation keys)
-- **Vite** - Lightning-fast build tool and dev server
-- **Framer Motion** - Production-ready animation library
-- **React Hook Form** - Performant form validation
+- **React 18** 
+- **TypeScript 5** 
+- **Material UI v5** 
+- **Emotion** 
+- **React Router v6**
+- **React i18next** 
+- **Vite** 
+- **Framer Motion**
+- **React Hook Form**
 
 ### Backend
-- **Firebase** - Backend as a Service (BaaS)
-  - **Firestore** - Real-time NoSQL database
-  - **Firebase Auth** - Email/password authentication
-  - **Firebase Storage** - Secure file storage
-  - **Firebase Hosting** - Global CDN deployment
-  - **Security Rules** - Data access control
-- **Node.js** - JavaScript runtime
-- **TypeScript** - Type-safe backend development
+- **Firebase** - (BaaS)
+  - **Firestore** 
+  - **Firebase Auth** 
+  - **Firebase Storage** 
+  - **Firebase Hosting** 
+  - **Security Rules** 
+- **Node.js** 
+- **TypeScript**
 
 ## 🌐 Internationalization
 
