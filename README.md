@@ -157,15 +157,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Thanks to all contributors who have helped shape EduPath into what it is today!
 
-## � Project Statistics
-
-- **Components**: 50+ React components
-- **Translation Keys**: 590+ (EN/TR)
-- **Modules**: 6 educational modules
-- **Lines of Code**: 10,000+
-- **Type Safety**: 100% TypeScript
-- **Test Coverage**: Growing
-
 ## 📞 Contact
 
 - **GitLab**: [EduPath Repository](https://gitlab.com/Abdhalid/edupath-app)
