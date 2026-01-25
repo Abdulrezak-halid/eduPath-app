@@ -163,46 +163,6 @@ Thanks to all contributors who have helped shape EduPath into what it is today!
 - **Developer**: Abdhalid
 - **Issues**: [Report bugs or request features](https://gitlab.com/Abdhalid/edupath-app/-/issues)
 
-## 🚀 Roadmap
-
-### Phase 1 - Core Platform ✅ COMPLETED
-- [x] Multi-language support (English, Turkish)
-- [x] User authentication (Firebase Auth)
-- [x] Responsive design (Mobile, Tablet, Desktop)
-- [x] Module-based architecture
-- [x] Base component library
-
-### Phase 2 - Educational Modules ✅ COMPLETED
-- [x] Academic Planning module with interactive templates
-- [x] Study Skills module with step-by-step guides
-- [x] Career Guidance module with accordion navigation
-- [x] University Life module with resource directory
-- [x] Personal Development with gamification
-- [x] Financial Planning module with budget tracking
-
-### Phase 3 - Interactive Features ✅ COMPLETED
-- [x] 590+ translation keys (EN/TR)
-- [x] Skill progress tracking system
-- [x] Challenge and achievement system
-- [x] Interactive priority matrix
-- [x] Development path selection
-- [x] Campus resource directory
-- [x] Real-time progress visualization
-
-### Phase 4 - Upcoming Features 🚧
-- [ ] User progress persistence (save to database)
-- [ ] Interactive quizzes and assessments
-- [ ] Student community forums
-- [ ] Study group matching system
-- [ ] AI-powered personalized recommendations
-- [ ] Achievement badges and leaderboards
-- [ ] Export reports (PDF/Excel)
-- [ ] Mobile native application (React Native)
-- [ ] Dark mode theme toggle
-- [ ] Notification system
-- [ ] Calendar integration
-- [ ] Study timer with Pomodoro technique
-
 ## 🔄 Project Status
 
 EduPath is under active development with regular updates and new features being added. We welcome contributions from the community!
