@@ -143,12 +143,6 @@ cd packages/backend
 firebase use --add  # Select your Firebase project
 ```
 
-### Production Build Output
-- Frontend: `packages/frontend/dist/` (deployed to Firebase Hosting)
-- Backend: Firebase configuration in `packages/backend/`
-
-Please make sure to update tests as appropriate and adhere to the existing coding style.
-
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
