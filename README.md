@@ -83,20 +83,6 @@ npm run dev
 - **Node.js** 
 - **TypeScript**
 
-## 🌐 Internationalization
-
-EduPath currently supports:
-- **English (en)** - 590+ translation keys
-- **Turkish (tr)** - 590+ translation keys
-
-All UI text is fully translated including:
-- Navigation, buttons, labels
-- Module content and descriptions
-- Tips, guides, and instructions
-- Error messages and notifications
-
-To add a new language, create a translation file in `packages/frontend/src/locales/`.
-
 ## 📦 Building for Production
 
 ```bash
