@@ -133,10 +133,6 @@ firebase use --add  # Select your Firebase project
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
-
-Thanks to all contributors who have helped shape EduPath into what it is today!
-
 ## 📞 Contact
 
 - **GitLab**: [EduPath Repository](https://gitlab.com/Abdhalid/edupath-app)
