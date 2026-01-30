@@ -60,29 +60,6 @@ cp packages/backend/.env.example packages/backend/.env
 # Start both frontend and backend in development mode
 npm run dev
 ```
-## 🛠️ Technology Stack
-
-### Frontend
-- **React 18** 
-- **TypeScript 5** 
-- **Material UI v5** 
-- **Emotion** 
-- **React Router v6**
-- **React i18next** 
-- **Vite** 
-- **Framer Motion**
-- **React Hook Form**
-
-### Backend
-- **Firebase** - (BaaS)
-  - **Firestore** 
-  - **Firebase Auth** 
-  - **Firebase Storage** 
-  - **Firebase Hosting** 
-  - **Security Rules** 
-- **Node.js** 
-- **TypeScript**
-
 ## 📦 Building for Production
 
 ```bash
