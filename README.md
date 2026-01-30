@@ -75,23 +75,6 @@ cd packages/backend
 npm run build
 ```
 
-## 🚀 Deployment
-
-### Firebase Deployment
-
-From the root directory:
-
-```bash
-# Deploy everything (hosting + firestore + storage)
-npm run deploy
-
-# Deploy only frontend hosting
-npm run deploy:hosting
-
-# Deploy only Firestore rules
-npm run deploy:firestore
-```
-
 ### Prerequisites
 
 1. Install Firebase CLI:
