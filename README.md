@@ -60,20 +60,6 @@ cp packages/backend/.env.example packages/backend/.env
 # Start both frontend and backend in development mode
 npm run dev
 ```
-## 📦 Building for Production
-
-```bash
-# Build both frontend and backend
-npm run build
-
-# Build frontend only
-cd packages/frontend
-npm run build
-
-# Build backend only (currently minimal)
-cd packages/backend
-npm run build
-```
 
 ### Prerequisites
 
