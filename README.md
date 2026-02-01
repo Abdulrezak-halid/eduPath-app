@@ -79,11 +79,6 @@ firebase use --add  # Select your Firebase project
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 📞 Contact
-
-- **GitLab**: [EduPath Repository](https://gitlab.com/Abdhalid/edupath-app)
-- **Developer**: Abdhalid
-- **Issues**: [Report bugs or request features](https://gitlab.com/Abdhalid/edupath-app/-/issues)
 
 ## 🔄 Project Status
 
