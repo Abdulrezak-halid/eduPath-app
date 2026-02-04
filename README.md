@@ -7,7 +7,7 @@
 
 EduPath is a comprehensive educational platform designed to guide students through their academic journey, providing valuable resources, tools, and support for university success.
 
-## 🌟 Features
+## Features
 
 - **Academic Planning** 📚
 - **Study Skills** 🎯
