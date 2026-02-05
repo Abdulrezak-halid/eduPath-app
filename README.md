@@ -9,14 +9,14 @@ EduPath is a comprehensive educational platform designed to guide students throu
 
 ## Features
 
-- **Academic Planning** 📚
-- **Study Skills** 🎯
-- **Career Guidance** 💼
-- **University Life** 🎓
-- **Personal Development** 🚀
-- **Financial Planning** 💰
+- **Academic Planning** 
+- **Study Skills** 
+- **Career Guidance** 
+- **University Life** 
+- **Personal Development** 
+- **Financial Planning** 
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -75,11 +75,11 @@ cd packages/backend
 firebase use --add  # Select your Firebase project
 ```
 
-## 📝 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 
-## 🔄 Project Status
+## Project Status
 
 EduPath is under active development with regular updates and new features being added. We welcome contributions from the community!
