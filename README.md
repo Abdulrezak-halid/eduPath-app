@@ -16,14 +16,6 @@ EduPath is a comprehensive educational platform designed to guide students throu
 - **Personal Development** 
 - **Financial Planning** 
 
-## Getting Started
-
-### Prerequisites
-
-- Node.js (v18 or higher)
-- npm or yarn
-- Git
-
 ### Installation
 
 1. Clone the repository
