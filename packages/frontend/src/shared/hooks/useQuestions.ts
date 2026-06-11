@@ -151,7 +151,7 @@ export const getQuestionById = async (
 /**
  * Add an answer to a question
  */
-export const addAnswer = async (questionId: string, p0: { content: string; authorId: string; authorName: string; authorPhotoURL: string; }): Promise<void> => {
+export const addAnswer = async (questionId: string, _answer: { content: string; authorId: string; authorName: string; authorPhotoURL: string; }): Promise<void> => {
   // In a real implementation, create an answer in the answers subcollection
   // For now, just increment the answer count
   const questionRef = doc(db, 'questions', questionId);
